@@ -1,0 +1,10 @@
+{
+    "Profile": true,
+    "Users": true,
+    "Contact": true,
+    "Budget": true,
+    "Inventory": true,
+    "Invoice": true,
+    "Orders": true,
+    "Services": true
+}
