@@ -14,6 +14,8 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        // users_create
+
         return view('users::index');
     }
 

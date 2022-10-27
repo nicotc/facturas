@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('inventory')->group(function() {
-    Route::get('/', 'InventoryController@index');
+
+
+
+Route::group(['middleware' => ['permission:client_list']], function () {
+    Route::resource('inventory', InventoryController::class);
 });

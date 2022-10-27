@@ -24,7 +24,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                       {{-- <livewire:contact::contact /> --}}
+                        
+                        <livewire:budget::budget />
                     </div>
                 </div>
             </div>

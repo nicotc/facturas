@@ -38,7 +38,7 @@
 
             <div class="row">
                 <div class="col-12">
-                {{ Form::open(array('route' => 'client.store')) }}
+                {{ Form::open(array('route' => 'client.store', "autocomplete"=>"off")) }}
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -49,20 +49,20 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="name">{{ __('Nombre') }}</label>
-                                        {{ Form::text('name', null, ['class' => 'form-control', 'id'=>"name"]) }}
+                                        {{ Form::text('name', null, ['class' => 'form-control', 'id'=>"name", "autocomplete"=>"off"]) }}
 
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Apellido') }}</label>
-                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'id'=>"last_name"]) }}
+                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'id'=>"last_name", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Genero') }}</label>
-                                        {{ Form::select('gender', ['M' => 'Masculino', 'F' => 'Femenino'], null, ['class'=>"form-control"]) }}
+                                        {{ Form::select('gender', ['M' => 'Masculino', 'F' => 'Femenino'], null, ['class'=>"form-control" , "autocomplete"=>"off" ]) }}
                                     </div>
                                 </div>
                             </div>
@@ -70,20 +70,20 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="email">{{ __('Email') }}</label>
-                                            {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255, 'id'=>'email']) !!}
+                                            {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255, 'id'=>'email' , "autocomplete"=>"off"]) !!}
 
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Telefono Local') }}</label>
-                                        {{ Form::text('phone_home', null, ['class' => 'form-control', 'id'=>"phone_home"]) }}
+                                        {{ Form::text('phone_home', null, ['class' => 'form-control', 'id'=>"phone_home" , "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Telefono Celular') }}</label>
-                                        {{ Form::text('phone_mobile', null, ['class' => 'form-control', 'id'=>"phone_mobile"]) }}
+                                        {{ Form::text('phone_mobile', null, ['class' => 'form-control', 'id'=>"phone_mobile" , "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Direccion') }}</label>
-                                        {{ Form::text('address', null, ['class' => 'form-control', 'id'=>"address"]) }}
+                                        {{ Form::text('address', null, ['class' => 'form-control', 'id'=>"address" , "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Notas') }}</label>
-                                        {{ Form::textarea('notes', null, ['class' => 'form-control', 'id'=>"notes"]) }}
+                                        {{ Form::textarea('notes', null, ['class' => 'form-control', 'id'=>"notes" , "autocomplete"=>"off" ]) }}
                                     </div>
                                 </div>
                             </div>
@@ -114,10 +114,10 @@
                                         <label for="Rif">{{ __('Cedula / Rif') }}</label>
                                         <div class="row">
                                             <div class="col-2">
-                                                {{ Form::select('rif_type', ['V' => 'V', 'E' => 'E', 'J' => 'J', 'G' => 'G'], null, ['class'=>"form-control"]) }}
+                                                {{ Form::select('rif_type', ['V' => 'V', 'E' => 'E', 'J' => 'J', 'G' => 'G'], null, ['class'=>"form-control" , "autocomplete"=>"off"]) }}
                                             </div>
                                             <div class="col-10">
-                                                {{ Form::text('rif', null, ['class' => 'form-control', 'id'=>"rif"]) }}
+                                                {{ Form::text('rif', null, ['class' => 'form-control', 'id'=>"rif", "autocomplete"=>"off"]) }}
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="last_name">Nombre / Empresa</label> <samp class="text-primary" onclick="copiarempresa()">copiar</samp>
-                                        {{ Form::text('company_name', null, ['class' => 'form-control', 'id'=>"company_name"]) }}
+                                        {{ Form::text('company_name', null, ['class' => 'form-control', 'id'=>"company_name", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>
@@ -133,13 +133,13 @@
                                  <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="last_name">Telefono</label> <samp class="text-primary" onclick="copiarphone()">copiar</samp>
-                                        {{ Form::text('company_phone', null, ['class' => 'form-control', 'id'=>"company_phone"]) }}
+                                        {{ Form::text('company_phone', null, ['class' => 'form-control', 'id'=>"company_phone", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="last_name">Email</label> <samp class="text-primary" onclick="copiaremail()">copiar</samp>
-                                        {{ Form::text('company_email', null, ['class' => 'form-control', 'id'=>"company_email"]) }}
+                                        {{ Form::text('company_email', null, ['class' => 'form-control', 'id'=>"company_email", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Direccion de facturacion') }}</label><samp class="text-primary" onclick="copiardireccion()">copiar</samp>
-                                        {{ Form::text('company_address', null, ['class' => 'form-control', 'id'=>"company_address"]) }}
+                                        {{ Form::text('company_address', null, ['class' => 'form-control', 'id'=>"company_address", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('Direccion de obra') }}</label> <samp class="text-primary" onclick="copiardireccion2()">copiar</samp>
-                                        {{ Form::text('work_address', null, ['class' => 'form-control', 'id'=>"work_address"]) }}
+                                        {{ Form::text('work_address', null, ['class' => 'form-control', 'id'=>"work_address", "autocomplete"=>"off"]) }}
                                     </div>
                                 </div>
                             </div>

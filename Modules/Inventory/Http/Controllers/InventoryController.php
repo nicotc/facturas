@@ -14,7 +14,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('inventory::index');
+        // $productos = \Modules\Inventory\Entities\Inventory::all();
+
+       return view('inventory::index');
     }
 
     /**
@@ -23,6 +25,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
+        dd('create');
         return view('inventory::create');
     }
 
@@ -43,6 +46,8 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
+        dd('show');
+
         return view('inventory::show');
     }
 

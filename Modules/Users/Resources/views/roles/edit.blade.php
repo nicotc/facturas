@@ -38,23 +38,32 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="permissions">{{ __('Permissions') }}</label>
-                                        <ul class="list-group">
-                                            @foreach ($permissions as $permission_id => $permission_name)
-                                                <li class="list-group-item">
-                                                    @if(in_array($permission_id, $role->permissions->pluck('id')->toArray()))
-                                                        <input type="checkbox" name="permissions[]" value="{{ $permission_id }}" checked>
-                                                    @else
-                                                        <input type="checkbox" name="permissions[]" value="{{ $permission_id }}">
-                                                    @endif
-                                                    {{$permission_name}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
+
+
+                                    @forelse ($permissions as $permissionkey => $permissionValue)
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                {{ strtoupper($permissionkey)}}
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-group">
+                                                    @foreach ($permissionValue as $permission_id => $permission_name)
+                                                    <li class="list-group-item">
+                                                        {{ Form::checkbox('permissions[]', $permission_id, $role->permissions->contains($permission_id), ['class' => 'name']) }}
+                                                        {{$permission_name}}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    @empty
+                                    <p>{{ __('No permissions found') }}</p>
+                                    @endforelse
+
+
+
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">

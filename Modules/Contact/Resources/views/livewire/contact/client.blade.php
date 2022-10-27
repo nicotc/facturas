@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6 ">
             <div class="btn-group float-right">
-                @can('users create')
+                @can('client_create')
                 <button type="button" class="btn btn-default" wire:click='add()'>
                     <i class="fas fa-plus-circle"></i>
                 </button>
@@ -55,7 +55,7 @@
                                     <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                
+
                                     {{-- <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
                                         <i class="fas fa-edit"></i>
                                     </button>

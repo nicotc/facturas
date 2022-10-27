@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
-            $table->integer('quantity');
-            $table->integer('alert_quantity');
-            $table->integer('price');
-            $table->integer('cost');
+            $table->integer('stock')->nullable();
+            $table->integer('stock_alert')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('cost')->nullable();
+            $table->enum('type', ['onDemand', 'Inventory'])->default('onDemand');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('products');
     }
 };

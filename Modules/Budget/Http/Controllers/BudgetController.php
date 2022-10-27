@@ -2,9 +2,12 @@
 
 namespace Modules\Budget\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Budget\Entities\Budget;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Contact\Entities\ContactAddress;
+use Modules\Budget\Http\Requests\CreateBudgetRequest;
 
 class BudgetController extends Controller
 {
@@ -14,6 +17,8 @@ class BudgetController extends Controller
      */
     public function index()
     {
+
+
         return view('budget::index');
     }
 
@@ -23,7 +28,11 @@ class BudgetController extends Controller
      */
     public function create()
     {
-        return view('budget::budget.create');
+        $contact_id = $_REQUEST['client'];
+
+        $contacts_address = ContactAddress::where('contact_id', $contact_id)->pluck('address', 'id');
+
+        return view('budget::budget.create', compact('contacts_address'));
     }
 
     /**
@@ -31,9 +40,12 @@ class BudgetController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(CreateBudgetRequest $request)
     {
-        //
+        $input = $request->all();
+        Budget::create($input);
+
+        return redirect()->route('client.show', $input['contacts_id']);
     }
 
     /**
@@ -43,6 +55,9 @@ class BudgetController extends Controller
      */
     public function show($id)
     {
+
+        $budget = Budget::find($id);
+        dd($budget);
       //  return view('budget::show');
     }
 

@@ -11,8 +11,10 @@
 |
 */
 
-// Route::group(['middleware' => ['permission:edit']], function () {
+Route::group(['middleware' => ['permission:client_list']], function () {
     Route::resource('client', ClientController::class);
+});
+Route::group(['middleware' => ['permission:provider_list']], function () {
     Route::resource('provider', ProviderController::class);
+});
     // Route::get('/', 'ContactController@index');
-// });

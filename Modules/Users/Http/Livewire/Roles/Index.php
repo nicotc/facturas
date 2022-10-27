@@ -29,12 +29,12 @@ class Index extends Component
             'id' => 'ID',
             'name' => trans('Name'),
             'guard_name' => trans('Guard Name'),
-            'created_at' => [
-                'label' => 'Created At',
-                'func' => function($value) {
-                    return $value->format('d/m/Y');
-                 }
-            ]
+            // 'created_at' => [
+            //     'label' => 'Created At',
+            //     'func' => function($value) {
+            //         return $value->format('d/m/Y');
+            //      }
+            // ]
         ];
     }
 

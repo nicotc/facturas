@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6 ">
             <div class="btn-group float-right">
-                @can('roles create')
+                @can('roles_create')
                 <button type="button" class="btn btn-default" wire:click='add()'>
                     <i class="fas fa-plus-circle"></i>
                 </button>
@@ -52,17 +52,17 @@
                           @endforeach
                           <td>
                               <div class="btn-group mb-3">
-                                @can("roles show")
+                                @can("roles_show")
                                   <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                       <i class="fas fa-eye"></i>
                                   </button>
                                 @endcan
-                                @can("roles edit")
+                                @can("roles_edit")
                                   <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
                                       <i class="fas fa-edit"></i>
                                   </button>
                                 @endcan
-                                @can("roles delete")
+                                @can("roles_delete")
                                   <button type="button" class="btn btn-default" data-toggle="modal"
                                       data-target="#modal-danger">
                                       <i class="fas fa-trash"></i>

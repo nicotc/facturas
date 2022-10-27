@@ -47,7 +47,7 @@
 
 
 
-                @can('users list')
+                @can('users_list')
                 <li class="nav-item">
                     <a href="/users" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('roles list')
+                @can('roles_list')
                 <li class="nav-item">
                     <a href="/roles" class="nav-link">
                         <i class="nav-icon fas fa-user-cog"></i>
@@ -78,12 +78,16 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              @can('client_list')
               <li class="nav-item">
                 <a href="/client" class="nav-link">
                   <i class="fas fa-circle nav-icon text-info"></i>
                   <p>Clientes</p>
                 </a>
               </li>
+              @endcan
+
               <li class="nav-item">
                 <a href="/provider" class="nav-link">
                   <i class="fas fa-circle nav-icon text-warning"></i>

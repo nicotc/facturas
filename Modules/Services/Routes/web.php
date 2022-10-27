@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('services')->group(function() {
-    Route::get('/', 'ServicesController@index');
+
+
+
+Route::group(['middleware' => ['permission:client_list']], function () {
+    Route::resource('services', ServicesController::class);
 });

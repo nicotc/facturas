@@ -14,7 +14,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $this->abortForbidden('users list');
+        $this->abortForbidden('users_list');
         return view('users::users.index');
     }
 
@@ -69,5 +69,5 @@ class UsersController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
- 
+
 }

@@ -1,18 +1,23 @@
 <?php
 
-// Route::prefix('users')->group(function() {
-    Route::group(['middleware' => ['permission:users list']], function () {
+use Maatwebsite\Excel\Row;
+
+
+
+
+    Route::group(['middleware' => ['permission:users_list']], function () {
         Route::resource('/users', UsersController::class);
     });
 
 
 
-    Route::group(['middleware' => ['permission:edit articles asdasd']], function () {
-        Route::get('/my-profile', 'UsersProfileController');
+    //  Route::get('/my-profile', 'UsersProfileController');
+
+
+    Route::group(['middleware' => ['permission:roles_list']], function () {
+        Route::resource('/roles', RolesController::class);
     });
 
-
-    Route::resource('/roles', RolesController::class);
 
     // ('/roles', 'RolesController@index')->name('roles.index');
 

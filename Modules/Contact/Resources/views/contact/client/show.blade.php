@@ -29,12 +29,12 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="col-md-12">
-                        <div class="card card-primary card-outline collapsed-card">
+                        <div class="card card-primary card-outline">
                             <div class="card-header card-outline">
                                 <h3 class="card-title">Contacto</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-plus"></i>
+                                    <i class="fas fa-minus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -150,10 +150,12 @@
               <div class="card-body">
                 <div class="tab-content" id="custom-tabs-one-tabContent">
                   <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                      <livewire:contact::contact.client />
+
+
+                    <livewire:budget::budget :client="$contact->id" />
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-                     <livewire:contact::contact.client />
+                    <livewire:budget::budget />
                   </div>
 
                 </div>
