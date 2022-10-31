@@ -57,8 +57,9 @@ class BudgetController extends Controller
     {
 
         $budget = Budget::find($id);
-        dd($budget);
-      //  return view('budget::show');
+       // dd($budget);
+        // budget_breakdowns . blade
+       return view('budget::budget.budget_breakdowns');
     }
 
     /**
