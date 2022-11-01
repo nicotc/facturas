@@ -3,10 +3,13 @@
 namespace Modules\Users\Http\Controllers;
 
 use App\Models\User;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use App\Http\Traits\PermissionTo;
 use Illuminate\Routing\Controller;
 use Spatie\Permission\Models\Role;
+use Modules\Users\Http\Requests\UserStoreRequest;
+use Modules\Users\Http\Requests\UserUpdateRequest;
 
 class UsersController extends Controller
 {
@@ -36,13 +39,17 @@ class UsersController extends Controller
         return view('users::users.edit', compact('user', 'roles'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        if ($request->password != "") {
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
-        $user->syncRoles($request->rol);
+        $user->syncRoles($request->role);
+        Flash::success('Usuario actualizado correctamente.');
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
@@ -52,14 +59,15 @@ class UsersController extends Controller
         return view('users::users.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        $user->syncRoles($request->rol);
+        $user->syncRoles($request->role);
+        Flash::success('Usuario guardado correctamente.');
         return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 

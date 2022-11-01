@@ -10,6 +10,8 @@ class Index extends Component
 {
     use WithPagination;
     public $sortColumn = 'id';
+    public $deleteId = '';
+    public $deleteName = '';
     public $sortDirection = "asc";
     public $hydrate;
     public $searchTerm = '';
@@ -26,9 +28,9 @@ class Index extends Component
     private function getHeaders()
     {
         return [
-            'id' => 'ID',
-            'name' => trans('Name'),
-            'guard_name' => trans('Guard Name'),
+            // 'id' => 'ID',
+            'name' => trans('Perfil'),
+            // 'guard_name' => trans('Guard Name'),
             // 'created_at' => [
             //     'label' => 'Created At',
             //     'func' => function($value) {
@@ -76,9 +78,18 @@ class Index extends Component
         redirect()->route('roles.edit', $id);
     }
 
-    public function destroy($id)
+    public function deleteId($id)
     {
-        $this->emit('delete', $id);
+
+        $this->deleteName = Role::find($id)->name;
+        $this->deleteId = $id;
+
+        // dd($this->deleteName, $this->deleteId);
+    }
+
+    public function delete()
+    {
+        Role::find($this->deleteId)->delete();
     }
 
     public function add()
@@ -86,5 +97,21 @@ class Index extends Component
         redirect()->route('roles.create');
     }
 
+    public function exportExcel()
+    {
+        // $data = $this->buildQuery()->get()->toArray();
+        // return
+        // Excel::create('Filename', function ($excel) {
+
+        //     $excel->sheet('Sheetname', function ($sheet) {
+
+        //         $sheet->fromArray(array(
+        //             array('data1', 'data2'),
+        //             array('data3', 'data4')
+        //         ));
+        //     });
+        // })->export('xls');
+
+    }
 
 }

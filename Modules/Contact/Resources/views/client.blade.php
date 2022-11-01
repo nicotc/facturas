@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ __('Listado de Clientes') }}</h1>
+                    <h1><i class="nav-icon fas fa-address-book text-info"></i> {{ __('Listado de Clientes') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

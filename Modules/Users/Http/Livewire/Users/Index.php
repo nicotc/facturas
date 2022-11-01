@@ -4,6 +4,7 @@ namespace Modules\Users\Http\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
+use Laracasts\Flash\Flash;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Excel;
 
@@ -11,6 +12,8 @@ class Index extends Component
 {
     use WithPagination;
     public $sortColumn = 'id';
+    public $deleteId = '';
+    public $deleteName = '';
     public $sortDirection = "asc";
     public $hydrate;
     public $searchTerm = '';
@@ -27,10 +30,10 @@ class Index extends Component
     private function getHeaders()
     {
         return [
-            'id' => 'ID',
-            'name' => trans('Name'),
+            // 'id' => 'ID',
+            'name' => trans('Nombre'),
             'email' => trans('Email'),
-            'rol' => trans('Role'),
+            'rol' => trans('Perfil'),
         ];
     }
 
@@ -82,9 +85,16 @@ class Index extends Component
         redirect()->route('users.edit', $id);
     }
 
-    public function destroy($id)
+
+    public function deleteId($id)
     {
-        $this->emit('delete', $id);
+        $this->deleteName = User::find($id)->name;
+        $this->deleteId = $id;
+    }
+
+    public function delete()
+    {
+        User::find($this->deleteId)->delete();
     }
 
     public function add()
@@ -94,18 +104,18 @@ class Index extends Component
 
     public function exportExcel()
     {
-        $data = $this->buildQuery()->get()->toArray();
-        return
-        Excel::create('Filename', function ($excel) {
+        // $data = $this->buildQuery()->get()->toArray();
+        // return
+        // Excel::create('Filename', function ($excel) {
 
-            $excel->sheet('Sheetname', function ($sheet) {
+        //     $excel->sheet('Sheetname', function ($sheet) {
 
-                $sheet->fromArray(array(
-                    array('data1', 'data2'),
-                    array('data3', 'data4')
-                ));
-            });
-        })->export('xls');
+        //         $sheet->fromArray(array(
+        //             array('data1', 'data2'),
+        //             array('data3', 'data4')
+        //         ));
+        //     });
+        // })->export('xls');
 
     }
 

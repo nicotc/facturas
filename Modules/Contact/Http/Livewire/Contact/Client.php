@@ -28,11 +28,11 @@ class Client extends Component
     private function getHeaders()
     {
         return [
-            'id' => 'ID',
+            // 'id' => 'ID',
             'name' => trans('Nombre'),
             'last_name' => trans('Apellido'),
             'email' => trans('Email'),
-            'phone_home' => trans('Telefono'),
+            'phone_home' => trans('Télefono'),
             'phone_mobile' => trans('Celular')
 
         ];

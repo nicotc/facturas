@@ -26,7 +26,7 @@
                             {{ is_array($value) ? $value['label'] : $value }}
                         </th>
                     @endforeach
-                    <th>{{ __('Actions') }}</th>
+                    <th>{{ __('Acciones') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +51,9 @@
                                     </button>
                                 @endcan
                                 @can('users_delete')
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                <button type="button" wire:click="deleteId({{ $item->id }})" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal"><i class="fas fa-trash"></i>
+                                </button>
                                 @endcan
                                 </div>
                             </td>
@@ -70,4 +70,28 @@
 
         </table>
         {{ $data->links() }}
+
+
+        <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true close-btn">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estas seguro de que decea eliminar el usuario <b>{{ $deleteName }}</b>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cancelar</button>
+                        <button type="button" wire:click.prevent="delete()" class="btn btn-danger close-modal"
+                            data-dismiss="modal">Si, eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>

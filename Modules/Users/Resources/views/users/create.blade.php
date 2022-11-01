@@ -5,11 +5,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>{{ __('Users Create') }}</h1>
+                <h1><i class="nav-icon fas fa-user"></i> {{ __('Crear usuario') }}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">List</li>
+                    <li class="breadcrumb-item active">
+                        <a href="{{ url("/users") }}">volver a la lista</a>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -20,21 +22,20 @@
 @section('content')
 <section class="content">
         <div class="container-fluid">
+            @include('partials.message')
+
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ __('Users Create') }}</h3>
-                        </div>
+                    <div class="card card-primary card-outline">
+
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
+                            {{ Form::open(['route' => 'users.store', 'method' => 'POST']) }}
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="name">{{ __('Name') }}</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="">
+                                            <label for="name">{{ __('Nombre del usuario') }}</label>
+                                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre del usuario']) }}
                                         </div>
                                     </div>
                                 </div>
@@ -42,40 +43,35 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="email">{{ __('Email') }}</label>
-                                            <input type="email" class="form-control" id="email" name="email" value="">
+                                            {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="password">{{ __('Password') }}</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="">
+                                            <label for="password">{{ __('Clave') }}</label>
+                                            {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Clave']) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="role">{{ __('Rol') }}</label>
-                                            <select class="form-control" id="role" name="rol">
-                                                <option value="">{{ __('Select') }}</option>
-                                                @foreach ($roles as $role_id => $role_name)
-                                                    <option value="{{ $role_id }}">{{ $role_name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="role">{{ __('Perfil') }}</label>
+                                            {{ Form::select('role', $roles, null, ['class' => 'form-control']) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                                            <a class="btn btn-secondary" href="{!! URL::previous() !!}" >{{ __('cancel') }}</a>
+                                            <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+                                            <a class="btn btn-secondary" href="{!! url('/users')  !!}" >{{ __('Cancelar') }}</a>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            {{ Form::close() }}
                         </div>
                     </div>
                 </div>
