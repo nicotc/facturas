@@ -32,7 +32,7 @@ class Client extends Component
             'name' => trans('Nombre'),
             'last_name' => trans('Apellido'),
             'email' => trans('Email'),
-            'phone_home' => trans('Télefono'),
+            'phone_home' => trans('Teléfono'),
             'phone_mobile' => trans('Celular')
 
         ];
