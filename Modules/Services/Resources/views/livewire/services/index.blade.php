@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6 ">
             <div class="btn-group float-right">
-                @can('users create')
+                @can('services_create')
                 <button type="button" class="btn btn-default" wire:click='add()'>
                     <i class="fas fa-plus-circle"></i>
                 </button>
@@ -38,7 +38,7 @@
                             {{ is_array($value) ? $value['label'] : $value }}
                         </th>
                     @endforeach
-                    <th>{{ __('Actions') }}</th>
+                    <th>{{ __('Acciones') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,15 +52,15 @@
                             @endforeach
                             <td>
                             <div class="btn-group mb-3">
-                                    <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
+                                    {{-- <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                         <i class="fas fa-eye"></i>
-                                    </button>
-                                    {{-- <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                                    </button> --}}
+                                    <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
+                                    <button type="button" class="btn btn-default" wire:click='delete({{$item->id}})'>
                                         <i class="fas fa-trash"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                             </td>
                         </tr>

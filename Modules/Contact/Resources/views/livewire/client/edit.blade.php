@@ -1,5 +1,5 @@
 <div>
-<div class="card card-primary card-outline">
+<div class="card card-primary card-outline" wire:ignore.self>
     <div class="card-header card-outline">
         <h3 class="card-title">Contacto</h3>
         <div class="card-tools">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-   
+
                 <button type="button" wire:click.prevent="update()" class="btn btn-primary close-modal"
                     data-dismiss="modal">Actualizar</button>
             </div>

@@ -38,7 +38,7 @@
                     {{ is_array($value) ? $value['label'] : $value }}
                 </th>
                 @endforeach
-                <th>{{ __('Actions') }}</th>
+                <th>{{ __('Acciones') }}</th>
             </tr>
         </thead>
         <tbody>

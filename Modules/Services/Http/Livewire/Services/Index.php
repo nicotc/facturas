@@ -27,9 +27,9 @@ class Index extends Component
     private function getHeaders()
     {
         return [
-            'id' => 'ID',
+            // 'id' => 'ID',
             'name' => trans('Servicio'),
-            'description' => trans('description')
+            'description' => trans('Descripción'),
 
         ];
     }

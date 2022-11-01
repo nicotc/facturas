@@ -77,7 +77,7 @@ class ClientController extends Controller
         $contactAdddress = ContactAddress::where('contact_id', $id)->get();
         return view('contact::contact.client.show', [
             'contact'=>$contact,
-            'contactsClient'=>$contactsClient,
+            'contactsInvoice'=>$contactsClient,
             'contactAdddress'=>$contactAdddress,
         ]);
     }

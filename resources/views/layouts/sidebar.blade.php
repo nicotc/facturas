@@ -69,7 +69,7 @@
                 @endcan
 
 
-                 <li class="nav-item">
+        <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
@@ -110,6 +110,9 @@
                 </li>
 
 
+
+
+
                 <li class="nav-item">
                     <a href="/invoice" class="nav-link">
 
@@ -132,14 +135,38 @@
                 </li>
 
 
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-icons"></i>
+                <p>
+                    Productos
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+                @can('client_list')
                 <li class="nav-item">
                     <a href="/inventory" class="nav-link">
-                        <i class="nav-icon fas fa-folder-open"></i>
-                        <p>
-                            {{ __('Inventario') }}
-                        </p>
+                        <i class="fas fa-circle nav-icon text-indigo"></i>
+                        <p>Inventario</p>
                     </a>
                 </li>
+                @endcan
+
+                <li class="nav-item">
+                    <a href="/provider" class="nav-link">
+                        <i class="fas fa-circle nav-icon text-maroon"></i>
+                        <p>Contra Pedido</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+
+
 
                 <li class="nav-item">
                     <a href="/services" class="nav-link">

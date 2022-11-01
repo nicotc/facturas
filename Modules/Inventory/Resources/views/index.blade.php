@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ __('Listado de productos') }}</h1>
+                    <h1><i class="nav-icon fas fa-icons text-indigo"></i> {{ __('Listado de productos inventariados') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                       <livewire:inventory::inventory.index />
+                        @php
+                            $Inventory = "Inventory";
+                        @endphp
+                       <livewire:inventory::inventory.index :type="$Inventory" />
                     </div>
                 </div>
             </div>

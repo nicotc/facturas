@@ -34,38 +34,11 @@
                     </div>
 
                     <div class="col-md-12">
-                        <livewire:contact::client.invoice-edit />
+                        <livewire:contact::client.invoice-edit :invoice="$contactsInvoice" />
                     </div>
 
                     <div class="col-md-12">
-                        <div class="card card-warning card-outline collapsed-card">
-                                <div class="card-header card-outline">
-                                <h3 class="card-title">Direcciones</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body box-profile">
-
-
-                                <div class="card-body direct-chat-messages">
-
-                                    @forelse ($contactAdddress as $Adddress )
-                                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Direccion</strong>
-                                        <p class="text-muted">{{ $Adddress->address }}</p>
-                                        <hr>
-                                    @empty
-                                        no tienes direcciones asociadas
-                                    @endforelse
-
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-warning btn-block"><i class="fas fa-edit"></i>Editar</button>
-                            </div>
-                        </div>
+                        <livewire:contact::client.address-edit :caddress="$contact->id" />
                     </div>
                 </div>
                 <div class="col-md-9">

@@ -11,6 +11,8 @@ use Modules\Inventory\Entities\Inventory;
 class Index extends Component
 {
     use WithPagination;
+
+    public $type;
     public $sortColumn = 'id';
     public $sortDirection = "asc";
     public $hydrate;
@@ -28,16 +30,12 @@ class Index extends Component
     private function getHeaders()
     {
         return [
-            'id' => 'ID',
-            'name' => trans('name'),
-            'description' => trans('description'),
-            'image' => trans('image'),
+            'name' => trans('Producto'),
+            'description' => trans('Descripción'),
             'stock' => trans('stock'),
-            'stock_alert' => trans('stock_alert'),
-            'price' => trans('price'),
-            'cost' => trans('cost'),
-            'type' => trans('type')
-
+            'stock_alert' => trans('stock bajo'),
+            'cost' => trans('costo'),
+            'price' => trans('precio venta'),
         ];
 
 
@@ -67,15 +65,14 @@ class Index extends Component
             if ($this->searchTerm != '') {
                 $query->where('name', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('description', 'like', '%' . $this->searchTerm . '%')
-                    ->orWhere('image', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('stock', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('stock_alert', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('price', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('cost', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('type', 'like', '%' . $this->searchTerm . '%');
             }
-        })
-            ->orderBy($this->sortColumn, $this->sortDirection);
+        })->where('type', $this->type)
+        ->orderBy($this->sortColumn, $this->sortDirection);
     }
 
 
@@ -131,5 +128,6 @@ class Index extends Component
                     ));
                 });
             })->export('xls');
-    }
+
+   }
 }
