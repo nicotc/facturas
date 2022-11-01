@@ -18,6 +18,17 @@ class Index extends Component
     public $hydrate;
     public $searchTerm = '';
     public $globalSearch = '';
+
+    public $name;
+    public $description;
+    public $stock;
+    public $stock_alert;
+    public $cost;
+    public $price;
+    public $invetario_id;
+
+
+
     protected $listeners = [
         'searchLocal'
     ];
@@ -96,12 +107,33 @@ class Index extends Component
 
     public function show($id)
     {
-        redirect()->route('inventory.show', $id);
+        dd($id);
+       // redirect()->route('inventory.show', $id);
     }
 
-    public function edit($id)
+    public function editId($id)
     {
-        redirect()->route('inventory.edit', $id);
+        $inventario = Inventory::find($id);
+        $this->invetario_id = $id;
+        $this->name = $inventario->name;
+        $this->description = $inventario->description;
+        $this->stock = $inventario->stock;
+        $this->stock_alert = $inventario->stock_alert;
+        $this->cost = $inventario->cost;
+        $this->price = $inventario->price;
+    }
+
+
+    public function update(){
+        $inventario = Inventory::find($this->invetario_id);
+        $inventario->name = $this->name;
+        $inventario->description = $this->description;
+        $inventario->stock = $this->stock;
+        $inventario->stock_alert = $this->stock_alert;
+        $inventario->cost = $this->cost;
+        $inventario->price = $this->price;
+        $inventario->save();
+         $this->resetInput();
     }
 
     public function destroy($id)
@@ -111,23 +143,47 @@ class Index extends Component
 
     public function add()
     {
-        redirect()->route('inventory.create');
+
+        Inventory::create([
+            'name' => $this->name,
+            'description' => $this->description,
+            'stock' => $this->stock,
+            'stock_alert' => $this->stock_alert,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'type' => $this->type,
+        ]);
+
+         $this->resetInput();
+
+
+        // redirect()->route('inventory.create');
     }
 
-    public function exportExcel()
+    public function resetInput()
     {
-        $data = $this->buildQuery()->get()->toArray();
-        return
-            Excel::create('Filename', function ($excel) {
+        $this->name = null;
+        $this->description = null;
+        $this->stock = null;
+        $this->stock_alert = null;
+        $this->cost = null;
+        $this->price = null;
+    }
 
-                $excel->sheet('Sheetname', function ($sheet) {
+    public function deleteId($id)
+    {
+        $inventario = Inventory::find($id);
+        $this->invetario_id = $inventario->id;
+        $this->name = $inventario->name;
 
-                    $sheet->fromArray(array(
-                        array('data1', 'data2'),
-                        array('data3', 'data4')
-                    ));
-                });
-            })->export('xls');
+    }
 
-   }
+    public function delete()
+    {
+        $inventario = Inventory::find($this->invetario_id);
+        $inventario->delete();
+    }
+
+
+
 }
