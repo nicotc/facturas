@@ -22,6 +22,12 @@ resize: none;
                             <div class="col-3">
                                 {{ $contactClient->name }}
                             </div>
+                            <div class="col-3">
+                                <b>Descripción del item:</b>
+                            </div>
+                            <div class="col-3">
+                                {{ $budgetItems->description }}
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-3">
@@ -29,6 +35,12 @@ resize: none;
                             </div>
                             <div class="col-3">
                                 {{ $contactClient->address }}
+                            </div>
+                            <div class="col-3">
+                                <b>Cantidad:</b>
+                            </div>
+                            <div class="col-3">
+                                {{ $budgetItems->quantity }}
                             </div>
                         </div>
                         <div class="row">
@@ -61,6 +73,7 @@ resize: none;
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
@@ -72,9 +85,9 @@ resize: none;
                 <div class="col-12">
                     <div class="card">
                         @php
-                            $budget_id = $budget->id;
+                            $budget_items_id = $budgetItems->id;
                         @endphp
-                        <livewire:budget::budget.items :budgetId="$budget_id" />
+                        <livewire:budget::budget.breakdown :budgetItems="$budget_items_id" />
                     </div>
                 </div>
             </div>

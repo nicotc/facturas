@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;use Illuminate\Database\Eloquent\Factorie
 class Inventory extends Model
 {
 
-    protected $table = 'products';
+    protected $table = 'materials';
 
 
     protected $fillable = [

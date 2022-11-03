@@ -18,4 +18,4 @@
 // Route::resource('budget', BudgetController::class);
 Route::get('budget', [BudgetController::class, 'index'])->name('budget.index');
 Route::get('budget/showItems/{id}', [BudgetController::class, 'showItems'])->name('budget.showItems');
-// Route::get('budget', [BudgetController::class, 'index'])->name('budget.index');
+Route::get('budget/showBreakdown/{id}', [BudgetController::class, 'showBreakdown'])->name('budget.showBreakdown');

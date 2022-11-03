@@ -38,7 +38,7 @@ return new class extends Migration
         Schema::create('budget_breakdowns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('budget_item_id')->constrained('budget_items');
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('material_id')->constrained('materials');
             $table->integer('price_base');
             $table->integer('price_final');
             $table->softDeletes();

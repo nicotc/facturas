@@ -111,7 +111,7 @@ class Items extends Component
 
     public function show($id)
     {
-        redirect()->route('budget.show', $id);
+        redirect()->route('budget.showBreakdown', $id);
 
     }
 }
