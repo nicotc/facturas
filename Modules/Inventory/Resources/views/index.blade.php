@@ -88,6 +88,24 @@
         }
     @endphp
   });
+
+
+
+
+
+
+
+
+
+
+window.livewire.on('create', () => {
+    $('#create').modal('hide');
+})
+
+
 </script>
+
+
+
 
 @endsection

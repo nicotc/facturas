@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->string('correlative')->unique();
-            $table->string('description');
+            $table->foreignId('services_id')->constrained('services');
             $table->foreignId('contacts_id')->constrained('contacts');
             $table->foreignId('contacts_address_id')->constrained('contacts_address');
             $table->enum('status', ['pending approval', 'approved', 'rejected'])->default('pending approval');

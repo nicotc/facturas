@@ -33,6 +33,30 @@ class Index extends Component
         'searchLocal'
     ];
 
+
+
+
+    protected $rules = [
+        'name' => 'required',
+        'description' => 'required',
+        'stock' => 'required',
+        'stock_alert' => 'required',
+        'cost' => 'required',
+        'price' => 'required',
+    ];
+
+
+    protected $messages = [
+        'name.required' => 'El nombre es requerido',
+        'description.required' => 'La descripción es requerida',
+        'stock.required' => 'El stock es requerido',
+        'stock_alert.required' => 'El stock de alerta es requerido',
+        'cost.required' => 'El costo es requerido',
+        'price.required' => 'El precio es requerido',
+    ];
+
+
+
     public function searchLocal($global)
     {
         $this->searchTerm = $global;
@@ -144,7 +168,10 @@ class Index extends Component
     public function add()
     {
 
-        Inventory::create([
+
+      $this->validate();
+
+       $inventario =  Inventory::create([
             'name' => $this->name,
             'description' => $this->description,
             'stock' => $this->stock,
@@ -155,9 +182,8 @@ class Index extends Component
         ]);
 
          $this->resetInput();
+         $this->emit('create');
 
-
-        // redirect()->route('inventory.create');
     }
 
     public function resetInput()

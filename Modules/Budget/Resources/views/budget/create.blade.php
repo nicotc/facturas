@@ -35,45 +35,138 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Nombre y apellido o razón social:</b>
+                            </div>
+                            <div class="col-6">
+                                {{ $contactClient->name }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Domicilio fiscal:</b>
+                            </div>
+                            <div class="col-6">
+                                {{ $contactClient->address }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Teléfono:</b>
+                            </div>
+                            <div class="col-6">
+                                {{ $contactClient->phone }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Rif / Cédula:</b>
+                            </div>
+                            <div class="col-6">
+                            {{ $contactClient->type }}  {{ $contactClient->rif }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        Datos de la obra
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                    <label for="Descripcion">Tipo de servicio </label>
+                            </div>
+                            <div class="col-6">
+                                    {{ Form::select('description', $services, null, ['class' => 'select2']) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="Descripcion">Direccion de la obra </label>
+                            </div>
+                            <div class="col-6">
+                                {{ Form::select('contacts_address_id', $address, null, ['class' => 'select2']) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Item del Presupuesto</h3>
+                    <div class="card-header bg-navy">
+                        Items del presupuesto
                     </div>
                     <div class="card-body">
-                        {{ Form::open(['route' => 'budget.store', 'method' => 'POST']) }}
-                            <div class="row">
-                                {{ Form::hidden("contacts_id", $_REQUEST['client']) }}
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="Descripcion">Descripcion</label>
-                                        {{ Form::text('description', null, ['class' => 'form-control', 'id' => 'description']) }}
-                                    </div>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                @can('users export')
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" wire:click='exportExcel()'>
+                                        <i class="fas fa-file-excel"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        <i class="fas fa-file-csv"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </button>
+                                </div>
+                                @endcan
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="btn-group float-right">
+                                    @can('client_create')
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#create">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </button>
+
+
+                                    @endcan
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="contacts_address_id">contacts_address_id</label>
-                                        {{ Form::select('contacts_address_id', $contacts_address, null, ['class' => 'form-control']) }}
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
+                        </div>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Descripcion</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Subtotal</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item['description'] }}</td>
+                                    <td>{{ $item['quantity'] }}</td>
+                                    <td>{{ $item['price'] }}</td>
+                                    <td>{{ $item['subtotal'] }}</td>
+                                    <td>
+                                        <button wire:click="removeItem({{ $loop->index }})" class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
+
+
 
 
 

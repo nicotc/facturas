@@ -19,23 +19,78 @@
 
 @section('content')
 <section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-navy">
+                Items del presupuesto
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-6">
+                        @can('users export')
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" wire:click='exportExcel()'>
+                                <i class="fas fa-file-excel"></i>
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fas fa-file-csv"></i>
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
+                        </div>
+                        @endcan
                     </div>
-                    @endif
+                    <div class="col-md-6 ">
+                        <div class="btn-group float-right">
+                            @can('client_create')
+                            <a href="{{ route('budget.create') }}" class="btn btn-default">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+                            @endcan
+                        </div>
+                    </div>
                 </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    @php
+                        $items = [];
+                    @endphp
+                    <tbody>
+                        @forelse ($items as $item)
+                        <tr>
+                            <td>{{ $item['description'] }}</td>
+                            <td>{{ $item['quantity'] }}</td>
+                            <td>{{ $item['price'] }}</td>
+                            <td>{{ $item['subtotal'] }}</td>
+                            <td>
+                                <button wire:click="removeItem({{ $item['id'] }})" class="btn btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center">No hay items</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+</div>
 
+
+{{--
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -273,7 +328,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 @endsection

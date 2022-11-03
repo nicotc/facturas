@@ -7,18 +7,21 @@
     <title>{{env('TITULO')}}</title>
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('lte-plugins/fontawesome-free/css/all.min.css') }}">
 
-      <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="{{ asset('lte-plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="{{ asset('lte-plugins/toastr/toastr.min.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('lte-plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('lte-plugins/toastr/toastr.min.css') }}">
 
     @yield('plugins-css')
     <link rel="stylesheet" href="{{ asset('lte-dist/css/adminlte.min.css') }}">
 
     <link href="{{ asset('lte-plugins\select2\css\select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lte-plugins\select2-bootstrap4-theme\select2-bootstrap4.min.css') }}" rel="stylesheet" />
+
 
     @livewireStyles
     @yield('custom-css')
@@ -49,7 +52,7 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
 
-                                <livewire:search />
+                            <livewire:search />
                         </form>
                     </div>
                 </li>
@@ -177,7 +180,8 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Creado &copy; 2022-2021 <a href="https://solucionesbit.com">solucionesbit</a>.</strong> Todos los derechos reservados.
+            <strong>Creado &copy; 2022-2021 <a href="https://solucionesbit.com">solucionesbit</a>.</strong> Todos los
+            derechos reservados.
 
         </footer>
 
@@ -191,35 +195,38 @@
 
 
 
-<!-- jQuery UI 1.11.4 -->
+    <!-- jQuery UI 1.11.4 -->
 
 
     <!-- jQuery -->
 
     <script src="{{ asset('lte-plugins/jquery/jquery.min.js') }}"></script>
-   <script src="{{ asset('lte-plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('lte-plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
 
     <!-- Bootstrap 4 -->
     <script src="{{ asset('lte-plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- SweetAlert2 -->
-<script src="{{ asset('lte-plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-<!-- Toastr -->
-<script src="{{ asset('lte-plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('lte-plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- Toastr -->
+    <script src="{{ asset('lte-plugins/toastr/toastr.min.js') }}"></script>
 
     <!-- AdminLTE App -->
     <script src="{{ asset('lte-dist/js/adminlte.min.js') }}"></script>
 
 
-<script src="{{ asset('lte-plugins\select2\js\select2.full.min.js' )}}"></script>
+    <script src="{{ asset('lte-plugins\select2\js\select2.full.min.js' )}}"></script>
 
-     @yield('plugin-js')
-    @yield('js')
+
+
+
 
 
     @livewireScripts
 
+@yield('plugin-js')
+    @yield('js')
 
 </body>
 

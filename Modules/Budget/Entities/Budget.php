@@ -4,6 +4,8 @@ namespace Modules\Budget\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Contact\Entities\ContactAddress;
+use Modules\Services\Entities\Service;
 
 class Budget extends Model
 {
@@ -11,12 +13,23 @@ class Budget extends Model
 
     protected $fillable = [
         'correlative',
-        'description',
+        'services_id',
         'contacts_id',
         'contacts_address_id',
         'status',
         'users_id',
     ];
+
+    public function getServiceNameAttribute()
+    {
+        return Service::find($this->services_id)->name;
+    }
+
+
+    public function getAddressNameAttribute()
+    {
+        return ContactAddress::find($this->contacts_address_id)->address;
+    }
 
 
     public static function boot()
@@ -29,7 +42,7 @@ class Budget extends Model
             $budget = Budget::count();
             $budget++;
             $budget = str_pad($budget, 3, "0", STR_PAD_LEFT);
-            $correlative = date('Ymd')."-".$budget;
+            $correlative = date('Ym').$budget;
             $model->correlative = $correlative;
             $model->status = 'pending approval';
 
