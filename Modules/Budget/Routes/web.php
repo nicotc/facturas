@@ -11,4 +11,11 @@
 |
 */
 
-Route::resource('budget', BudgetController::class);
+ use Modules\Budget\Http\Controllers\BudgetController;
+
+
+
+// Route::resource('budget', BudgetController::class);
+Route::get('budget', [BudgetController::class, 'index'])->name('budget.index');
+Route::get('budget/showItems/{id}', [BudgetController::class, 'showItems'])->name('budget.showItems');
+// Route::get('budget', [BudgetController::class, 'index'])->name('budget.index');

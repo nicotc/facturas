@@ -111,7 +111,7 @@ class Index extends Component
 
     public function show($id)
     {
-        redirect()->route('budget.show', $id);
+        redirect()->route('budget.showItems', $id);
     }
 
     public function edit($id)

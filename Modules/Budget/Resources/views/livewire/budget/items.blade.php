@@ -30,38 +30,55 @@
             </div>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Subtotal</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            @php
-            $items = [];
-            @endphp
-            <tbody>
-                @forelse ($items as $item)
-                <tr>
-                    <td>{{ $item['description'] }}</td>
-                    <td>{{ $item['quantity'] }}</td>
-                    <td>{{ $item['price'] }}</td>
-                    <td>{{ $item['subtotal'] }}</td>
-                    <td>
-                        <button wire:click="removeItem({{ $item['id'] }})"
-                            class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="5" class="text-center">No hay items</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+      <table class="table table-striped">
+                <thead>
+                    <tr>
+                        @foreach ($headers as $key => $value)
+                        <th style="cursor: pointer" wire:click="sort('{{ $key }}')">
+                            @if($key == $sortColumn)
+                            <span> {!! $sortDirection == 'asc' ? '&#8659': '&#8657;' !!} </span>
+                            @endif
+                            {{ is_array($value) ? $value['label'] : $value }}
+                        </th>
+                        @endforeach
+                        <th>{{ __('Actions') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(count($data))
+                    @foreach ($data as $item)
+                    <tr>
+                        @foreach ($headers as $key => $value)
+                        <td>
+                            {!! is_array($value) ? $value['func']($item->$key) : $item->$key !!}
+                        </td>
+                        @endforeach
+                        <td>
+                            <div class="btn-group mb-3">
+                                <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td colspan="{{ count($headers)+1 }}" class="text-center">
+                            {{ __("No data found") }}
+                        </td>
+                    </tr>
+                    @endif
+                </tbody>
+
+            </table>
+            {{ $data->links() }}
     </div>
 
 

@@ -20,11 +20,18 @@ class BudgetController extends Controller
     }
 
 
-    public function show($id)
+    public function showItems($id)
     {
         $budget = Budget::find($id);
         $contactClient = ContactsClient::find($budget->contacts_id);
         return view('budget::items', compact('contactClient', 'budget'));
         // return view('budget::budget.budget_breakdowns', compact('contactClient', 'budget'));
+    }
+
+    public function showBreakdown($id)
+    {
+        $budget = Budget::find($id);
+        $contactClient = ContactsClient::find($budget->contacts_id);
+        return view('budget::breakdown', compact('contactClient', 'budget'));
     }
 }

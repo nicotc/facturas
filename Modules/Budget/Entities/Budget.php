@@ -26,6 +26,24 @@ class Budget extends Model
     }
 
 
+    public function getStatusAttribute()
+    {
+        if ($this->attributes['status'] == "pending approval") {
+            return "Pendiente de Aprobación";
+        } elseif ($this->attributes['status'] == "approved") {
+            return "Aprobado";
+        } elseif ($this->attributes['status'] == "rejected") {
+            return "Rechazado";
+        } elseif ($this->attributes['status'] == "in progress") {
+            return "En Progreso";
+        } elseif ($this->attributes['status'] == "finished") {
+            return "Finalizado";
+        } elseif ($this->attributes['status'] == "canceled") {
+            return "Cancelado";
+        }
+    }
+
+
     public function getAddressNameAttribute()
     {
         return ContactAddress::find($this->contacts_address_id)->address;

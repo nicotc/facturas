@@ -71,7 +71,10 @@ resize: none;
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <livewire:budget::budget.items />
+                        @php
+                            $budget_id = $budget->id;
+                        @endphp
+                        <livewire:budget::budget.items :budgetId="$budget_id" />
                     </div>
                 </div>
             </div>
