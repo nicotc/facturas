@@ -53,10 +53,12 @@ return new class extends Migration
 
         Schema::create('budget_extras', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('budgets_id')->constrained('budgets');
             $table->foreignId('budget_item_id')->constrained('budget_items');
-            $table->string('name');
+            $table->string('description');
             $table->integer('quantity');
-            $table->integer('amount');
+            $table->float('cost_unitary', 10, 4);
+            $table->float('total', 10, 4);
             $table->softDeletes();
             $table->timestamps();
         });

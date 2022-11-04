@@ -2,7 +2,7 @@
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-indigo">
+            <div class="modal-header bg-navy">
                 <h5 class="modal-title" id="exampleModalLabel">Desglose del Item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true close-btn">×</span>
@@ -63,7 +63,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" wire:click.prevent="add()" class="btn bg-indigo close-modal"
+                <button type="button" wire:click.prevent="add()" class="btn bg-navy close-modal"
                     data-dismiss="modal">Gruardar</button>
             </div>
         </div>

@@ -92,6 +92,23 @@ resize: none;
                 </div>
             </div>
         </div>
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        @php
+                        $budget_items_id = $budgetItems->id;
+                        @endphp
+                        <livewire:budget::budget.extras :budgetItems="$budget_items_id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </section>
 
 @endsection
