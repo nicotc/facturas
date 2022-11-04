@@ -37,10 +37,16 @@ return new class extends Migration
 
         Schema::create('budget_breakdowns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('budgets_id')->constrained('budgets');
             $table->foreignId('budget_item_id')->constrained('budget_items');
             $table->foreignId('material_id')->constrained('materials');
-            $table->integer('price_base');
-            $table->integer('price_final');
+            $table->integer('quantity');
+            $table->float('cost_unit_base', 10, 4);
+            $table->float('cost_unit_proyectado', 10, 4);
+            $table->float('cal_base_cantidad', 10, 4);
+            $table->float('cal_proyectado_cantidad', 10, 4);
+            $table->float('cal_mano_obra', 10, 4);
+            $table->float('cal_total_proyectado', 10, 4);
             $table->softDeletes();
             $table->timestamps();
         });

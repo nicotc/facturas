@@ -3,6 +3,8 @@
 namespace Modules\Budget\Http\Livewire\Budget;
 
 use Livewire\Component;
+use Modules\Budget\Entities\Budget;
+use Modules\Budget\Entities\BudgetBreakdowns;
 use Modules\Budget\Entities\BudgetItems;
 use Modules\Inventory\Entities\Inventory;
 
@@ -20,12 +22,11 @@ class Breakdown extends Component
     public $Calcular;
 
 
-
+    public $budgetItems;
 
     public $materialArray;
     public $funcMateriales;
 
-    public $budgetId;
 
 
 
@@ -49,9 +50,16 @@ class Breakdown extends Component
     {
 
         return [
-            // 'id' => 'ID',
-            'quantity' => trans('Cantidad'),
-            'description' => trans('Descriptión'),
+
+            // 'budget_item_id' => 'Item',
+            'name' => 'Material',
+            'quantity' => 'Cantidad',
+            'cost_unit_base' => 'Costo Unitario Base',
+            'cost_unit_proyectado' => 'Costo Unitario Proyectado',
+            'cal_base_cantidad' => 'Calculo Base Cantidad',
+            'cal_proyectado_cantidad'   => 'Calculo Proyectado Cantidad',
+            'cal_mano_obra' => 'Calculo Mano de Obra',
+            'cal_total_proyectado' => 'Calculo Total Proyectado'
         ];
     }
 
@@ -66,19 +74,29 @@ class Breakdown extends Component
     private function buildQuery()
     {
 
-        return BudgetItems::select(
-            'budget_items.id',
-            'budget_items.budgets_id',
-            'budget_items.description',
-            'budget_items.quantity'
+
+        return BudgetBreakdowns::select(
+            'budget_breakdowns.id',
+            'budgets_id',
+            'budget_item_id',
+            'material_id',
+            'materials.name',
+            'quantity',
+            'cost_unit_base',
+            'cost_unit_proyectado',
+            'cal_base_cantidad',
+            'cal_proyectado_cantidad',
+            'cal_mano_obra',
+            'cal_total_proyectado'
         )
+        ->join('materials', 'materials.id', '=', 'material_id')
             ->where(function ($query) {
                 if ($this->searchTerm != '') {
-                    $query->where('description', 'like', '%' . $this->searchTerm . '%')
+                    $query->where('cost_unit_base', 'like', '%' . $this->searchTerm . '%')
                         ->orWhere('quantity', 'like', '%' . $this->searchTerm . '%');
                 }
             })
-            ->where('budgets_id', $this->budgetId)
+            ->where('budget_item_id', $this->budgetItems)
             ->orderBy($this->sortColumn, $this->sortDirection);
     }
 
@@ -108,14 +126,22 @@ class Breakdown extends Component
     public function add()
     {
 
-        BudgetItems::create([
-            'budgets_id' => $this->budgetId,
-            'description' => $this->description,
+        $budget =  BudgetItems::find($this->budgetItems)->first();
+        $budget_id = $budget->budgets_id;
+
+        BudgetBreakdowns::create([
+            'budgets_id' => $budget_id,
+            'budget_item_id' => $this->budgetItems,
+            'material_id' => $this->material,
             'quantity' => $this->quantity,
+            'cost_unit_base' => $this->costUnitBase,
+            'cost_unit_proyectado' => $this->costUnitProyectado,
+            'cal_base_cantidad' => $this->CalBaseCantidad,
+            'cal_proyectado_cantidad' => $this->CalProyectadoCantidad,
+            'cal_mano_obra' => $this->CalManoObra,
+            'cal_total_proyectado' => $this->CalTotalProyectado,
         ]);
 
-        $this->description = "";
-        $this->quantity = "";
 
         $this->getUsers();
         // dd($this->budgetId , $this->description, $this->quantity);
