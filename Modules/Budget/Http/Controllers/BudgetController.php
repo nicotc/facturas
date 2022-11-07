@@ -34,6 +34,7 @@ class BudgetController extends Controller
         $budgetItems = BudgetItems::find($id);
         $budget = Budget::find($budgetItems->budgets_id);
         $contactClient = ContactsClient::find($budget->contacts_id);
+
         return view('budget::breakdowns', compact('budgetItems', 'contactClient', 'budget'));
     }
 

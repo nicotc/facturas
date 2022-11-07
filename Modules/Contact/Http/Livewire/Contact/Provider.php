@@ -82,7 +82,6 @@ class Provider extends Component
     public function render()
     {
         return view(
-
             'contact::livewire.contact.provider',
             [
                 'data' => $this->getUsers(),

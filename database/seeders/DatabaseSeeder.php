@@ -9,6 +9,9 @@ use Spatie\Permission\Models\Role;
 use Modules\Services\Entities\Service;
 use Spatie\Permission\Models\Permission;
 use Modules\Inventory\Entities\Inventory;
+use Modules\Contact\Entities\ContactAddress;
+use Modules\Contact\Entities\ContactsClient;
+use Modules\Contact\Entities\Contact;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         $root = User::create([
             'name' => 'Root',
-            'email' => 'root@gmail.com',
+            'email' => 'nicotestagrossa@gmail.com',
             'password' => bcrypt('root'),
         ]);
 
@@ -283,6 +286,60 @@ class DatabaseSeeder extends Seeder
                 'type' => 'Inventory',
             ],
         );
+
+
+
+        //crear clientes
+
+        $clientes = Contact::create(
+            [
+                'name' => 'Juan',
+                'last_name' => 'Perez',
+                'gender' => 'Masculino',
+                'email' => 'jperez@gmail.com',
+                'phone_home' => '12345678',
+                'phone_mobile' => '12345678',
+                'address' => 'Calle 1',
+                'notes' => 'Ninguna',
+                'type' => 'client'
+            ]);
+
+
+            ContactsClient::create(
+            [
+                'contact_id' => $clientes->id,
+                'type' => 'J',
+                'rif' => '12345678-9',
+                'name' => 'Juan',
+                'phone' => '12345678',
+                'email' => 'jperez@gmail.com',
+                'address' => 'Calle 2',
+            ]
+            );
+
+        ContactAddress::create(
+            [
+                'contact_id' => $clientes->id,
+                'address' => 'Calle 2',
+                'default' => true,
+            ]
+            );
+
+        ContactAddress::create(
+            [
+                'contact_id' => $clientes->id,
+                'address' => 'Calle asd',
+                'default' => true,
+            ]
+        );
+
+
+
+
+
+
+
+
 
 
 

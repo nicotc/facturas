@@ -56,12 +56,27 @@
                             <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                 <i class="fas fa-eye"></i>
                             </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                   <i class="fas fa-traffic-light"></i>  <span class="sr-only"></span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" wire:click='status({{$item->id}} , 0)'>Pendiente de Aprobación</a>
+                                    <a class="dropdown-item" wire:click='status({{$item->id}} , 1)'>Aprobado</a>
+                                    <a class="dropdown-item" wire:click='status({{$item->id}} , 2)'>Rechazado</a>
+                                    <a class="dropdown-item" wire:click='status({{$item->id}} , 3)'>En Progreso</a>
+                                    <a class="dropdown-item" wire:click='status({{$item->id}} , 4)'>Finalizado</a>
+                                </div>
+                            </div>
+                            {{-- <button type="button" class="btn btn-default" wire:click='status({{$item->id}})'>
+                                <i class="fas fa-traffic-light"></i>
+                            </button> --}}
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editarPresupuesto">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
+                            {{-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
                                 <i class="fas fa-trash"></i>
-                            </button>
+                            </button> --}}
                         </div>
                     </td>
                 </tr>

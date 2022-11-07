@@ -40,7 +40,8 @@ class Budget extends Model
             return "Finalizado";
         } elseif ($this->attributes['status'] == "canceled") {
             return "Cancelado";
-        }
+        } 
+
     }
 
 

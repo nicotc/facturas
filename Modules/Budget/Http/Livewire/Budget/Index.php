@@ -126,8 +126,17 @@ class Index extends Component
             'contacts_id' => $this->client,
             'contacts_address_id' => $this->selectedAddress,
         ]);
+    }
 
-        //redirect()->route('budget.create', compact('client'));
+    public function status($id, $status)
+    {
+
+        $statusArray = ['pending approval', 'approved', 'rejected', 'in progress', 'finished', 'canceled'];
+
+
+        $budget = Budget::find($id);
+        $budget->status = $statusArray[$status];
+        $budget->save();
     }
 
 }

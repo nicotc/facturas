@@ -17,11 +17,11 @@
         </div>
         <div class="col-md-6 ">
             <div class="btn-group float-right">
-                @can('users create')
+
                 <button type="button" class="btn btn-default" wire:click='add()'>
                     <i class="fas fa-plus-circle"></i>
                 </button>
-                @endcan
+        
             </div>
         </div>
     </div>

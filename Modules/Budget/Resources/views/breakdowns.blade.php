@@ -9,6 +9,22 @@ resize: none;
 @endsection
 
 @section('content-header')
+<section class="content-header">
+<div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1><i class="nav-icon fas fa-receipt "></i> {{ __('Desglose Presupuesto') }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/client">Listado de clientes</a> </li>
+                    <li class="breadcrumb-item"><a href="/client/{{$budget->contacts_id}}">Cliente</a> </li>
+                    <li class="breadcrumb-item"><a href="/budget/showItems/{{ $budget->id }}">Items Presupuesto</a> </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
 <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-12">
@@ -75,6 +91,7 @@ resize: none;
         </div>
 
     </div>
+</section>
 @endsection
 
 
