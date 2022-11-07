@@ -11,6 +11,7 @@ use Modules\Contact\Entities\ContactAddress;
 use Modules\Contact\Entities\ContactsClient;
 use Modules\Contact\Http\Requests\ContactStoreRequest;
 use Modules\Contact\Transformers\ContactStoreResource;
+use Modules\Services\Entities\Service;
 
 class ClientController extends Controller
 {
@@ -75,10 +76,16 @@ class ClientController extends Controller
         $contact = Contact::findOrFail($id);
         $contactsClient = ContactsClient::where('contact_id', $id)->first();
         $contactAdddress = ContactAddress::where('contact_id', $id)->get();
+
+        $services = Service::all();
+
+
         return view('contact::contact.client.show', [
             'contact'=>$contact,
             'contactsInvoice'=>$contactsClient,
             'contactAdddress'=>$contactAdddress,
+            'services'=>$services,
+
         ]);
     }
 

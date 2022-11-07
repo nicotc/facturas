@@ -5,19 +5,13 @@
     <div class="card-body">
         <div class="row ">
             <div class="col-md-6">
-                @can('users export')
+
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default" wire:click='exportExcel()'>
-                        <i class="fas fa-file-excel"></i>
-                    </button>
                     <button type="button" class="btn btn-default">
-                        <i class="fas fa-file-csv"></i>
-                    </button>
-                    <button type="button" class="btn btn-default">
-                        <i class="fas fa-file-pdf"></i>
+                        <i class="fas fa-file-pdf text-danger" wire:click='print_pdf({{$budgetId}})' ></i>
                     </button>
                 </div>
-                @endcan
+
             </div>
             <div class="col-md-6 ">
                 <div class="btn-group float-right">
@@ -41,7 +35,9 @@
                             {{ is_array($value) ? $value['label'] : $value }}
                         </th>
                         @endforeach
-                        <th>{{ __('Actions') }}</th>
+                        <th> Precio Unitario </th>
+                        <th> Monto </th>
+                        <th>{{ __('Acciones') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +49,11 @@
                             {!! is_array($value) ? $value['func']($item->$key) : $item->$key !!}
                         </td>
                         @endforeach
+                        <td>
+                            {{ $item->costoUnitario }}
+                        </td>
+                        <td>
+                        {{ $item->Total }}
                         <td>
                             <div class="btn-group mb-3">
                                 <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
@@ -70,7 +71,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="{{ count($headers)+1 }}" class="text-center">
+                        <td colspan="{{ count($headers)+3 }}" class="text-center">
                             {{ __("No data found") }}
                         </td>
                     </tr>

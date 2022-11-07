@@ -2,8 +2,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link text-center">
         <img src="/lte-dist/img/AdminLTELogo.png" alt="Remodela Tu Mundo" class=" img-circle elevation-3"
-            style="opacity: 1">
-
+            style="opacity: 1; width:100%; max-width:180px" >
     </a>
 
     <!-- Sidebar -->

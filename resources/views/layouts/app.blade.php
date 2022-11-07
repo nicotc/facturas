@@ -5,22 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{env('TITULO')}}</title>
-
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('lte-plugins/fontawesome-free/css/all.min.css') }}">
-
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{{ asset('lte-plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('lte-plugins/toastr/toastr.min.css') }}">
-
     @yield('plugins-css')
     <link rel="stylesheet" href="{{ asset('lte-dist/css/adminlte.min.css') }}">
 
-    <link href="{{ asset('lte-plugins\select2\css\select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('lte-plugins\select2-bootstrap4-theme\select2-bootstrap4.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('virtual-select.min.css') }}">
+
+  {{-- <link href="{{ asset('lte-plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lte-plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" rel="stylesheet" /> --}}
 
 
     @livewireStyles
@@ -34,10 +33,10 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                {{-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../../index3.html" class="nav-link">Home</a>
-                </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/client" class="nav-link"><i class="nav-icon fas fa-address-book text-info"></i> Clientes</a>
+                </li>
+                {{-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
                 </li> --}}
             </ul>
@@ -215,18 +214,19 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('lte-dist/js/adminlte.min.js') }}"></script>
 
-
-    <script src="{{ asset('lte-plugins\select2\js\select2.full.min.js' )}}"></script>
-
-
-
-
+<script src="{{ asset('virtual-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('lte-plugins/select2/js/select2.full.min.js' )}}"></script> --}}
 
 
     @livewireScripts
 
-@yield('plugin-js')
+
+
+    @yield('plugin-js')
+
     @yield('js')
+
+
 
 </body>
 

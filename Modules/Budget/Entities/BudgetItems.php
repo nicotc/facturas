@@ -19,7 +19,15 @@ class BudgetItems extends Model
     ];
 
 
+    public function getcostoUnitarioAttribute(){
+        $breakdowns = BudgetBreakdowns::where('budget_item_id',$this->id)->sum('cal_total_proyectado');
+        $extras =   BudgetExtras::where('budget_item_id',$this->id)->sum('total');;
+        return $breakdowns + $extras;
+    }
 
+    public function getTotalAttribute(){
+        return  $this->costoUnitario * $this->quantity;
+    }
     public static function boot()
     {
         parent::boot();

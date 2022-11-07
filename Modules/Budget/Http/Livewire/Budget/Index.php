@@ -20,12 +20,10 @@ class Index extends Component
     public $searchTerm = '';
     public $globalSearch = '';
     public $client ="";
-    public $address ="";
-    public $contactAdddress;
-    public $serviceModel;
-    public $addressModel;
-    public $serviceModelArray;
-    public $addressModelArray;
+    public $selectedAddress;
+    public $selectedService;
+
+
     protected $listeners = [
         'searchLocal'
     ];
@@ -37,17 +35,15 @@ class Index extends Component
         $this->searchTerm = $global;
     }
 
+
     private function getHeaders()
     {
 
         return [
-            // 'id' => 'ID',
             'correlative' => trans('# De Presupuesto'),
             'service_name' => trans('Tipo de servicio'),
-            // 'contacts_id' => trans('contacts_id'),
             'address' => trans('Dirección de la obra'),
             'status' => trans('Estado del presupuesto'),
-            // 'users_id' => trans('users_id')
         ];
     }
 
@@ -78,7 +74,7 @@ class Index extends Component
         ->where(function ($query) {
             if ($this->searchTerm != '') {
                 $query->where('correlative', 'like', '%' . $this->searchTerm . '%')
-                    ->orWhere('service_name', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('services.name', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('contacts_id', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('contacts_address.address', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('status', 'like', '%' . $this->searchTerm . '%')
@@ -89,17 +85,14 @@ class Index extends Component
             ->orderBy($this->sortColumn, $this->sortDirection);
     }
 
-
     private function getUsers()
     {
         return $this->buildQuery()->paginate(10);
     }
 
-
     public function render()
     {
-        $this->serviceModelArray =  $this->service();
-        $this->addressModelArray =  $this->address();
+
         return view(
             'budget::livewire.budget.index',
             [
@@ -116,7 +109,8 @@ class Index extends Component
 
     public function edit($id)
     {
-        redirect()->route('budget.edit', $id);
+
+        //redirect()->route('budget.edit', $id);
     }
 
     public function destroy($id)
@@ -126,23 +120,14 @@ class Index extends Component
 
     public function add()
     {
+
         Budget::create([
-            'services_id' => $this->serviceModel,
+            'services_id' => $this->selectedService,
             'contacts_id' => $this->client,
-            'contacts_address_id' => $this->addressModel,
+            'contacts_address_id' => $this->selectedAddress,
         ]);
-        $this->serviceModel = '';
-        $this->addressModel = '';
+
         //redirect()->route('budget.create', compact('client'));
     }
-
-    public function address(){
-      return   ContactAddress::where('contact_id', $this->client)->pluck('address', 'id');
-    }
-
-    public function service(){
-        return  Service::pluck('name', 'id');
-    }
-
 
 }

@@ -21,12 +21,12 @@
                 </div>
                 <div class="form-group">
                     <label for="costo">Costo unitario base</label>
-                    <input type="number" wire:model="costUnitBase"  class="form-control" id="costo"
+                    <input type="number" wire:model="costUnit"  class="form-control" id="costo"
                         placeholder="Ingrese el costo unitario Base">
                     @error('cost') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
-                    <label for="costUnitProyectado">Costo total base: 10</label>
+                    <label for="costUnitProyectado">Costo total base: {{$total}}</label>
                 </div>
 
             </div>

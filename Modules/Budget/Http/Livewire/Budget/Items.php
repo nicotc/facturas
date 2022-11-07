@@ -6,6 +6,7 @@ use Livewire\Component;
 use Modules\Budget\Entities\Budget;
 use Modules\Budget\Entities\BudgetItems;
 use Modules\Contact\Entities\ContactsClient;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Items extends Component
 {
@@ -112,6 +113,15 @@ class Items extends Component
     public function show($id)
     {
         redirect()->route('budget.showBreakdown', $id);
+
+    }
+
+
+    public function print_pdf($id)
+    {
+
+        redirect()->route('budget.print', $id);
+
 
     }
 }

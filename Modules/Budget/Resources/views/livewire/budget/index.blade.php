@@ -56,7 +56,7 @@
                             <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editarPresupuesto">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
@@ -79,6 +79,7 @@
         {{ $data->links() }}
     </div>
     @include('budget::partials.modalAdd')
+
 </div>
 
 

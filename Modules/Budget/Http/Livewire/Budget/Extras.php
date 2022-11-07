@@ -13,13 +13,9 @@ class Extras extends Component
 {
     public $material;
     public $quantity;
-    public $costUnitBase;
-    public $costUnitProyectado;
-    public $CalBaseCantidad;
-    public $CalProyectadoCantidad;
-    public $CalManoObra;
-    public $CalTotalProyectado;
-    public $Calcular;
+    public $description;
+    public $costUnit;
+    public $total;
 
 
     public $budgetItems;
@@ -50,8 +46,6 @@ class Extras extends Component
     {
 
         return [
-            // 'budgets_id',
-            // 'budget_item_id',
             'description' => 'Descripcion',
             'quantity' => 'Cantidad',
             'cost_unitary' => 'Costo Unitario',
@@ -120,17 +114,13 @@ class Extras extends Component
         $budget =  BudgetItems::find($this->budgetItems)->first();
         $budget_id = $budget->budgets_id;
 
-        BudgetBreakdowns::create([
+        BudgetExtras::create([
             'budgets_id' => $budget_id,
             'budget_item_id' => $this->budgetItems,
-            'material_id' => $this->material,
+            'description' => $this->description,
             'quantity' => $this->quantity,
-            'cost_unit_base' => $this->costUnitBase,
-            'cost_unit_proyectado' => $this->costUnitProyectado,
-            'cal_base_cantidad' => $this->CalBaseCantidad,
-            'cal_proyectado_cantidad' => $this->CalProyectadoCantidad,
-            'cal_mano_obra' => $this->CalManoObra,
-            'cal_total_proyectado' => $this->CalTotalProyectado,
+            'cost_unitary' => $this->costUnit,
+            'total' => $this->quantity*$this->costUnit,
         ]);
 
 
@@ -149,23 +139,17 @@ class Extras extends Component
     public function updatedquantity()
     {
         if ($this->quantity != null) {
-            if ($this->costUnitBase != null) {
-                $this->CalBaseCantidad = $this->quantity * $this->costUnitBase;
-                $this->CalManoObra = ($this->CalBaseCantidad / 2);
-            }
-            if ($this->costUnitProyectado != null) {
-                $this->CalProyectadoCantidad = $this->quantity * $this->costUnitProyectado;
-                $this->CalTotalProyectado = $this->CalProyectadoCantidad + $this->CalManoObra;
+            if ($this->costUnit != null) {
+                $this->total = $this->quantity * $this->costUnit;
             }
         }
     }
 
-    public function updatedcostUnitBase()
+    public function updatedcostUnit()
     {
         if ($this->quantity != null) {
-            if ($this->costUnitBase != null) {
-                $this->CalBaseCantidad = $this->quantity * $this->costUnitBase;
-                $this->CalManoObra = ($this->CalBaseCantidad / 2);
+            if ($this->costUnit != null) {
+                $this->total = $this->quantity * $this->costUnit;
             }
         }
     }

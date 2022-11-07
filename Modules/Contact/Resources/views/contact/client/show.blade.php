@@ -80,3 +80,88 @@
 
 
 
+@section('js')
+
+<script>
+    $(function() {
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    @php
+        if(session('flash_notification', collect())->toArray() != null){
+            $flash = session('flash_notification', collect())->toArray();
+            $flash = $flash[0];
+            $type = $flash['level'];
+            $message = $flash['message'];
+            switch ($type) {
+                case 'success':
+                @endphp
+                    toastr.success("{{$message}}")
+                @php
+                break;
+                case 'error':
+                @endphp
+                    toastr.error("{{$message}}")
+                @php
+                break;
+            }
+        }
+    @endphp
+  });
+
+
+
+        document.addEventListener('livewire:load', function () {
+            let direcciones = [
+                    @foreach($contactAdddress as $Address)
+                        { label: "{{ $Address->address }}", value: "{{ $Address->id }}" },
+                    @endforeach
+                ];
+            VirtualSelect.init({
+                ele: '#direcciones',
+                options: direcciones,
+                multiple: false,
+                search: true,
+                selectedValue: 1
+
+            });
+
+            let servicios = [
+                    @foreach($services as $service)
+                        { label: "{{ $service->name }}", value: "{{ $service->id }}" },
+                    @endforeach
+                ];
+            VirtualSelect.init({
+                ele: '#servicios',
+                options: servicios,
+                multiple: false,
+                search: true,
+                selectedValue: 1
+
+            });
+
+
+
+            let selectedAddress = document.querySelector('#direcciones')
+            selectedAddress.addEventListener('change', () => {
+                let data = selectedAddress.value
+                let componente = $('#direcciones').data("component")
+                window.livewire.find(componente).set('selectedAddress', data)
+            })
+
+            let selectedServices = document.querySelector('#servicios')
+            selectedServices.addEventListener('change', () => {
+                let data = selectedServices.value
+                let componente = $('#servicios').data("component")
+                window.livewire.find(componente).set('selectedService', data)
+            })
+
+        })
+
+
+
+</script>
+@endsection

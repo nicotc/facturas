@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self  class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -10,26 +10,14 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="address">Dirección de la obra
-                    </label>
-                    <select  wire:model="addressModel" name="address" id="address" class="select2">
-                        <option value="">Seleccione una dirección</option>
-                        @forelse ($addressModelArray as $itemKey => $itemValue)
-                            <option value="{{ $itemKey }}">{{ $itemValue }}</option>
-                        @endforeach
-                    </select>
-                    @error('name') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <label for="address">Dirección de la obra</label>
+                    <div data-component="{{ $this->id }}"  id="direcciones" wire:ignore  ></div>
+                    @error('direcciones') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
-                    <label for="service">Tipo de servicio</label>
-                    <select  wire:model="serviceModel" name="service" id="service" class="select2">
-                        <option value="">Seleccione un servicio</option>
-                        @forelse ($serviceModelArray as $itemKey => $itemValue)
-                            <option value="{{ $itemKey }}">{{ $itemValue }}</option>
-                        @endforeach
-                    </select>
-
-                    @error('description') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <label for="address">Servicios</label>
+                    <div data-component="{{ $this->id }}" id="servicios" wire:ignore></div>
+                    @error('servicios') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-footer">
@@ -39,4 +27,8 @@
             </div>
         </div>
     </div>
+
+
+
+
 </div>

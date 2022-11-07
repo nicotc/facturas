@@ -68,15 +68,11 @@
   });
 
 
-        document.addEventListener('livewire:load', function () {
-           $(".select2").select2({ theme: 'bootstrap4' });
-           $("#addressModelArray").on('change', function(){
-                @this.set('address', this.value);
-           });
-           $("#serviceModel").on('change', function(){
-                @this.set('service', this.value);
-           });
-        });
+
+
+
+
+
 
 </script>
 
