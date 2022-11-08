@@ -193,6 +193,13 @@ class Items extends Component
 
     public function print_pdf($id)
     {
+
         redirect()->route('budget.print', $id);
+    }
+
+
+    public function pagos($id)
+    {
+        dd($id);
     }
 }

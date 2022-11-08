@@ -7,8 +7,11 @@
             <div class="col-md-6">
 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default">
-                        <i class="fas fa-file-pdf text-danger" wire:click='print_pdf({{$budgetId}})' ></i>
+                    <button type="button" class="btn btn-default" wire:click='print_pdf({{$budgetId}})'>
+                        <i class="fas fa-file-pdf text-danger"></i> Presupuesto
+                    </button>
+                    <button type="button" class="btn btn-default" wire:click='pagos({{$budgetId}})'>
+                        <i class="fas fa-dollar-sign text-success"></i> Pagos
                     </button>
                 </div>
 
