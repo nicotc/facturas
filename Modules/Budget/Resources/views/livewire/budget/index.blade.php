@@ -19,7 +19,7 @@
             <div class="col-md-6 ">
                 <div class="btn-group float-right">
                     @can('budget_create')
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#create">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#createBudget">
                         <i class="fas fa-plus-circle"></i>
                     </button>
                     @endcan

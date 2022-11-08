@@ -161,7 +161,9 @@
 
         })
 
-
+    window.livewire.on('create', () => {
+        $('#createBudget').modal('hide');
+    })
 
 </script>
 @endsection

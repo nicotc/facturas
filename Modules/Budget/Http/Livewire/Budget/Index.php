@@ -126,6 +126,8 @@ class Index extends Component
             'contacts_id' => $this->client,
             'contacts_address_id' => $this->selectedAddress,
         ]);
+
+        $this->emit('create');
     }
 
     public function status($id, $status)

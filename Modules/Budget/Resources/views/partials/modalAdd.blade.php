@@ -1,4 +1,4 @@
-<div wire:ignore.self  class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self  class="modal fade" id="createBudget" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
