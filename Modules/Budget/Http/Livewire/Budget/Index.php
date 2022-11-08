@@ -22,6 +22,7 @@ class Index extends Component
     public $client ="";
     public $selectedAddress;
     public $selectedService;
+    public $budgetId;
 
 
     protected $listeners = [
@@ -107,10 +108,26 @@ class Index extends Component
         redirect()->route('budget.showItems', $id);
     }
 
-    public function edit($id)
+    public function editId($id)
+    {
+        $budgetData = Budget::find($id);
+        $this->budgetId = $budgetData->id;
+        $this->selectedService = $budgetData->services_id;
+        $this->selectedAddress = $budgetData->contacts_address_id;
+    }
+
+    public function edit()
     {
 
-        //redirect()->route('budget.edit', $id);
+        // $this->validate();
+        $Update = Budget::find($this->budgetId);
+        $Update->services_id = $this->selectedService;
+        $Update->contacts_address_id = $this->selectedAddress;
+        $Update->save();
+
+        $this->getUsers();
+
+        $this->emit('update');
     }
 
     public function destroy($id)

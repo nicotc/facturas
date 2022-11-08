@@ -71,7 +71,7 @@
                             {{-- <button type="button" class="btn btn-default" wire:click='status({{$item->id}})'>
                                 <i class="fas fa-traffic-light"></i>
                             </button> --}}
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editarPresupuesto">
+                            <button type="button" class="btn btn-default" data-toggle="modal" wire:click="editId({{ $item->id }})" data-target="#editBudget">
                                 <i class="fas fa-edit"></i>
                             </button>
                             {{-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
@@ -94,6 +94,7 @@
         {{ $data->links() }}
     </div>
     @include('budget::partials.modalAdd')
+    @include('budget::partials.modalEdit')
 
 </div>
 

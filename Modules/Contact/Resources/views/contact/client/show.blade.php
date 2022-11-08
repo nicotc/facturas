@@ -128,6 +128,13 @@
                 selectedValue: 1
 
             });
+            VirtualSelect.init({
+                ele: '#direccionesedit',
+                options: direcciones,
+                multiple: false,
+                search: true,
+                selectedValue: 1
+            });
 
             let servicios = [
                     @foreach($services as $service)
@@ -142,7 +149,13 @@
                 selectedValue: 1
 
             });
-
+            VirtualSelect.init({
+                ele: '#serviciosedit',
+                options: servicios,
+                multiple: false,
+                search: true,
+                selectedValue: 1
+            });
 
 
             let selectedAddress = document.querySelector('#direcciones')
@@ -152,6 +165,14 @@
                 window.livewire.find(componente).set('selectedAddress', data)
             })
 
+            let selectedAddress2 = document.querySelector('#direccionesedit')
+                selectedAddress2.addEventListener('change', () => {
+                let data = selectedAddress2.value
+                let componente = $('#direccionesedit').data("component")
+                window.livewire.find(componente).set('selectedAddress', data)
+            })
+
+
             let selectedServices = document.querySelector('#servicios')
             selectedServices.addEventListener('change', () => {
                 let data = selectedServices.value
@@ -159,11 +180,22 @@
                 window.livewire.find(componente).set('selectedService', data)
             })
 
+            let selectedServices2 = document.querySelector('#serviciosedit')
+                selectedServices2.addEventListener('change', () => {
+                let data = selectedServices2.value
+                let componente = $('#serviciosedit').data("component")
+                window.livewire.find(componente).set('selectedService', data)
+                })
+
         })
 
     window.livewire.on('create', () => {
         $('#createBudget').modal('hide');
     })
+
+    window.livewire.on('update', () => {
+        $('#editBudget').modal('hide');
+        })
 
 </script>
 @endsection
