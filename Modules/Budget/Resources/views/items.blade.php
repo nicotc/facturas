@@ -134,7 +134,15 @@ resize: none;
     @endphp
   });
 
+window.livewire.on('create', () => {
+    $('#create').modal('hide');
+    toastr.success("{{ __('Item creado correctamente') }}")
 
+})
+window.livewire.on('update', () => {
+    $('#ItemsEdit').modal('hide');
+    toastr.success("{{ __('Item atualizado correctamente') }}")
+})
 
 
 </script>

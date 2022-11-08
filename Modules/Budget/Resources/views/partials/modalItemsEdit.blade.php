@@ -1,10 +1,9 @@
-<div wire:ignore.self class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="ItemsEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
-        <form autocomplete="off" wire:submit.prevent="add()">
         <div class="modal-content">
             <div class="modal-header bg-navy">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo Item</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true close-btn">×</span>
                 </button>
@@ -26,9 +25,8 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" wire:click.prevent="add()" class="btn bg-navy">Gruardar</button>
+                <button type="button" wire:click.prevent="edit()" class="btn bg-navy">Actualizar</button>
             </div>
         </div>
-        </form>
     </div>
 </div>

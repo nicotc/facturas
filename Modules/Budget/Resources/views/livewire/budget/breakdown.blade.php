@@ -22,14 +22,12 @@
             <div class="col-md-6 ">
                 <div class="btn-group float-right">
                     @can('client_create')
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#create">
+                    <button type="button" class="btn btn-default" data-toggle="modal" wire:click='resetInput()'data-target="#Desglosecreate">
                         <i class="fas fa-plus-circle"></i>
                     </button>
                     @endcan
                 </div>
             </div>
-        </div>
-
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -58,7 +56,7 @@
                             <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                            <button type="button" class="btn btn-default" wire:click='editId({{$item->id}})' data-toggle="modal" data-target="#Desgloseedit">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-default" data-toggle="modal"
@@ -84,6 +82,7 @@
 
 
     @include('budget::partials.modalBreakdownAdd')
+    @include('budget::partials.modalBreakdownEdit')
 
 
 

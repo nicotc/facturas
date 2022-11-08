@@ -14,9 +14,10 @@ class Items extends Component
     public $description;
     public $quantity;
     public $budgetId;
+    public $idItem;
 
 
-
+    // INICIO DATA TABLE
     public $sortColumn = 'id';
     public $sortDirection = "desc";
     public $hydrate;
@@ -88,11 +89,45 @@ class Items extends Component
         );
     }
 
+    // FIN DATA TABLE
+
+
+    // VALIDACIONES
+
+    protected $rules = [
+        'description' => 'required',
+        'quantity' => 'required',
+    ];
+
+
+    protected $messages = [
+        'description.required' => 'El campo Descripción es obligatorio',
+        'quantity.required' => 'El campo Cantidad es obligatorio',
+    ];
+
+
+    public function resetInput()
+    {
+        $this->description = "";
+        $this->quantity = "";
+        $this->idItem = "";
+        $this->resetErrorBag();
+    }
+
+    // FIN VALIDACIONES
+
+
+    public function show($id)
+    {
+        redirect()->route('budget.showBreakdown', $id);
+    }
+
 
 
 
     public function add()
     {
+        $this->validate();
 
         BudgetItems::create([
             'budgets_id' => $this->budgetId,
@@ -103,25 +138,61 @@ class Items extends Component
         $this->description = "";
         $this->quantity = "";
 
-        $this->getUsers();
-// dd($this->budgetId , $this->description, $this->quantity);
-
+        $this->resetInput();
+        $this->emit('create');
 
     }
 
 
-    public function show($id)
+
+
+
+
+    public function editId($id)
     {
-        redirect()->route('budget.showBreakdown', $id);
+
+        $budgetEdit = BudgetItems::find($id);
+        $this->idItem = $budgetEdit->id;
+        $this->description = $budgetEdit->description;
+        $this->quantity = $budgetEdit->quantity;
+        $this->budgetId = $budgetEdit->budgets_id;
 
     }
+
+
+    public function edit()
+    {
+        $this->validate();
+        $budgetEdit = BudgetItems::find($this->idItem);
+        $budgetEdit->description = $this->description;
+        $budgetEdit->quantity = $this->quantity;
+        $budgetEdit->budgets_id = $this->budgetId;
+        $budgetEdit->save();
+        $this->emit('update');
+        $this->resetInput();
+
+    }
+
+
+
+    public function deleteId($id)
+    {
+        // $inventario = BudgetItems::find($id);
+        // $this->invetario_id = $inventario->id;
+        // $this->name = $inventario->name;
+    }
+
+    public function delete()
+    {
+        // $inventario = Inventory::find($this->invetario_id);
+        // $inventario->delete();
+    }
+
+
 
 
     public function print_pdf($id)
     {
-
         redirect()->route('budget.print', $id);
-
-
     }
 }

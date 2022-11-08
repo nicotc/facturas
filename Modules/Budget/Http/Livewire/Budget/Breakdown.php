@@ -20,10 +20,9 @@ class Breakdown extends Component
     public $CalManoObra;
     public $CalTotalProyectado;
     public $Calcular;
-
+    public $breakdownId;
 
     public $budgetItems;
-
     public $materialArray;
     public $funcMateriales;
 
@@ -122,9 +121,48 @@ class Breakdown extends Component
 
 
 
+    protected $rules = [
+        'material' => 'required',
+        'quantity'  => 'required',
+        'costUnitBase' => 'required',
+        'costUnitProyectado' => 'required',
+        'CalBaseCantidad' => 'required',
+        'CalProyectadoCantidad' => 'required',
+        'CalManoObra'   => 'required',
+        'CalTotalProyectado' => 'required',
+    ];
+
+
+    protected $messages = [
+        'material.required' => 'El campo material es requerido',
+        'quantity.required' => 'El campo cantidad es requerido',
+        'costUnitBase.required' => 'El campo costo unitario base es requerido',
+        'costUnitProyectado.required' => 'El campo costo unitario proyectado es requerido',
+        'CalBaseCantidad.required' => 'El campo calculo base cantidad es requerido',
+        'CalProyectadoCantidad.required' => 'El campo calculo proyectado cantidad es requerido',
+        'CalManoObra.required' => 'El campo calculo mano de obra es requerido',
+        'CalTotalProyectado.required' => 'El campo calculo total proyectado es requerido',
+    ];
+
+    public function resetInput()
+    {
+    $this->material = '';
+    $this->quantity = '';
+    $this->costUnitBase = '';
+    $this->costUnitProyectado = '';
+    $this->CalBaseCantidad = '';
+    $this->CalProyectadoCantidad = '';
+    $this->CalManoObra = '';
+    $this->CalTotalProyectado = '';
+
+        $this->resetErrorBag();
+    }
+
 
     public function add()
     {
+
+        $this->validate();
 
         $budget =  BudgetItems::find($this->budgetItems)->first();
         $budget_id = $budget->budgets_id;
@@ -142,13 +180,55 @@ class Breakdown extends Component
             'cal_total_proyectado' => $this->CalTotalProyectado,
         ]);
 
+        $this->resetInput();
 
+        $this->emit('create');
         $this->getUsers();
         // dd($this->budgetId , $this->description, $this->quantity);
 
 
     }
 
+
+
+
+    public function editId($id){
+       $edit =  BudgetBreakdowns::find($id);
+        $this->breakdownId = $id;
+        $this->material = $edit->material_id;
+        $this->quantity = $edit->quantity;
+        $this->costUnitBase = $edit->cost_unit_base;
+        $this->costUnitProyectado = $edit->cost_unit_proyectado;
+        $this->CalBaseCantidad = $edit->cal_base_cantidad;
+        $this->CalProyectadoCantidad = $edit->cal_proyectado_cantidad;
+        $this->CalManoObra = $edit->cal_mano_obra;
+        $this->CalTotalProyectado = $edit->cal_total_proyectado;
+    }
+
+    public function edit(){
+        $this->validate();
+
+        $budget =  BudgetItems::find($this->budgetItems)->first();
+        $budget_id = $budget->budgets_id;
+
+        BudgetBreakdowns::find($this->breakdownId)->update([
+            'budgets_id' => $budget_id,
+            'budget_item_id' => $this->budgetItems,
+            'material_id' => $this->material,
+            'quantity' => $this->quantity,
+            'cost_unit_base' => $this->costUnitBase,
+            'cost_unit_proyectado' => $this->costUnitProyectado,
+            'cal_base_cantidad' => $this->CalBaseCantidad,
+            'cal_proyectado_cantidad' => $this->CalProyectadoCantidad,
+            'cal_mano_obra' => $this->CalManoObra,
+            'cal_total_proyectado' => $this->CalTotalProyectado,
+        ]);
+
+        $this->resetInput();
+
+        $this->emit('update');
+        $this->getUsers();
+    }
 
     public function show($id)
     {

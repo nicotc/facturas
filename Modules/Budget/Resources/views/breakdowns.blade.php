@@ -164,6 +164,15 @@ resize: none;
   });
 
 
+  window.livewire.on('create', () => {
+$('#Desglosecreate').modal('hide');
+toastr.success("{{ __('Desglose creado correctamente') }}")
+
+})
+window.livewire.on('update', () => {
+$('#Desgloseedit').modal('hide');
+toastr.success("{{ __('Desglose atualizado correctamente') }}")
+})
 
 
 </script>

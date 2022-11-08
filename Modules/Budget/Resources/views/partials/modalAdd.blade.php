@@ -22,8 +22,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" wire:click.prevent="add()" class="btn bg-indigo close-modal"
-                    data-dismiss="modal">Gruardar</button>
+                <button type="button" wire:click.prevent="add()" class="btn bg-indigo">Gruardar</button>
             </div>
         </div>
     </div>

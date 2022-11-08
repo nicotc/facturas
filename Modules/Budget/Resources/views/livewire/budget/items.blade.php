@@ -16,7 +16,7 @@
             <div class="col-md-6 ">
                 <div class="btn-group float-right">
                     @can('client_create')
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#create">
+              <button type="button" class="btn btn-default" wire:click='resetInput()' data-toggle="modal" data-target="#create">
                         <i class="fas fa-plus-circle"></i>
                     </button>
                     @endcan
@@ -59,7 +59,7 @@
                                 <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                                <button type="button" class="btn btn-default" wire:click='editId({{$item->id}})' data-toggle="modal" data-target="#ItemsEdit")'>
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
@@ -84,6 +84,7 @@
 
 
     @include('budget::partials.modalItemsAdd')
+    @include('budget::partials.modalItemsEdit')
 
 
 
