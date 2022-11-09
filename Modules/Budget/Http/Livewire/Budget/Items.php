@@ -198,8 +198,8 @@ class Items extends Component
     }
 
 
-    public function pagos($id)
+    public function abonos($id)
     {
-        dd($id);
+        // dd($id);
     }
 }

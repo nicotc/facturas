@@ -84,14 +84,22 @@ resize: none;
 
 
 @section('content')
+    @php
+        $budget_id = $budget->id;
+    @endphp
+
+<livewire:budget::budget.abonado :budgetId="$budget_id" />
+
+
+
+
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @php
-                            $budget_id = $budget->id;
-                        @endphp
+
                         <livewire:budget::budget.items :budgetId="$budget_id" />
                     </div>
                 </div>

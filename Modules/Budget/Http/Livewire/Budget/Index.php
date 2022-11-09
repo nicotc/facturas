@@ -114,6 +114,8 @@ class Index extends Component
         $this->budgetId = $budgetData->id;
         $this->selectedService = $budgetData->services_id;
         $this->selectedAddress = $budgetData->contacts_address_id;
+        $this->emit('serviceBudget', $this->selectedService);
+        $this->emit('addressBudget', $this->selectedAddress);
     }
 
     public function edit()

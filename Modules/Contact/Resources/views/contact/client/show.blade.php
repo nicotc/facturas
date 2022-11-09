@@ -112,50 +112,69 @@
     @endphp
   });
 
+  var serviceinput
+  var addressinput
+
+  function funservice() {
+    return serviceinput;
+  }
+
+window.livewire.on('serviceBudget', service => {
+ serviceinput = service
+});
+
+
 
 
         document.addEventListener('livewire:load', function () {
             let direcciones = [
-                    @foreach($contactAdddress as $Address)
-                        { label: "{{ $Address->address }}", value: "{{ $Address->id }}" },
-                    @endforeach
-                ];
+                @foreach($contactAdddress as $Address)
+                    { label: "{{ $Address->address }}", value: "{{ $Address->id }}" },
+                @endforeach
+            ];
+
+            let servicios = [
+                @foreach($services as $service)
+                { label: "{{ $service->name }}", value: "{{ $service->id }}" },
+                @endforeach
+            ];
+
             VirtualSelect.init({
                 ele: '#direcciones',
                 options: direcciones,
                 multiple: false,
                 search: true,
-                selectedValue: 1
-
-            });
-            VirtualSelect.init({
-                ele: '#direccionesedit',
-                options: direcciones,
-                multiple: false,
-                search: true,
-                selectedValue: 1
             });
 
-            let servicios = [
-                    @foreach($services as $service)
-                        { label: "{{ $service->name }}", value: "{{ $service->id }}" },
-                    @endforeach
-                ];
             VirtualSelect.init({
                 ele: '#servicios',
                 options: servicios,
                 multiple: false,
                 search: true,
-                selectedValue: 1
-
             });
+
             VirtualSelect.init({
                 ele: '#serviciosedit',
                 options: servicios,
                 multiple: false,
                 search: true,
-                selectedValue: 1
             });
+
+                VirtualSelect.init({
+                    ele: '#direccionesedit',
+                    options: direcciones,
+                    multiple: false,
+                    search: true,
+                });
+
+            window.livewire.on('serviceBudget', service => {
+                document.querySelector('#serviciosedit').setValue(service);
+            });
+
+            window.livewire.on('addressBudget', address => {
+                document.querySelector('#direccionesedit').setValue(address);
+            });
+
 
 
             let selectedAddress = document.querySelector('#direcciones')
