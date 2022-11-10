@@ -86,7 +86,7 @@
 
     @include('budget::partials.modalItemsAdd')
     @include('budget::partials.modalItemsEdit')
-    @include('budget::partials.modalAbonos')
+
 
 
 

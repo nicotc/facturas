@@ -15,6 +15,9 @@ class Abonado extends Component
     public $budgetId;
     public $totalPagar;
     public $totalAbonado;
+    public $fecha;
+    public $monto;
+    public $forma_pago;
 
     private function getHeaders()
     {
@@ -63,6 +66,7 @@ class Abonado extends Component
 
     public function totalAPagar()
     {
+        $arrayBreakdowns = $sumaExtras = $arrayExtras = [];
         $total = 0;
         $BudgetItems = BudgetItems::where('budgets_id', $this->budgetId)->pluck('quantity', 'id')->toArray();
         foreach ($BudgetItems as $key => $value) {
@@ -86,5 +90,12 @@ class Abonado extends Component
 
 
 
+    public function add(){
+        dd("hola");
+    }
+
+     public function resetInput(){
+
+     }
 
 }
