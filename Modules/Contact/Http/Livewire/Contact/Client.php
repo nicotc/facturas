@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Excel;
 use Modules\Contact\Entities\Contact;
+use Termwind\Components\Dd;
 
 class Client extends Component
 {
@@ -19,6 +20,7 @@ class Client extends Component
     protected $listeners = [
         'searchLocal'
     ];
+
 
     public function searchLocal($global)
     {
@@ -99,6 +101,7 @@ class Client extends Component
 
     public function edit($id)
     {
+
         redirect()->route('client.edit', $id);
     }
 
@@ -112,19 +115,8 @@ class Client extends Component
         redirect()->route('client.create');
     }
 
-    public function exportExcel()
-    {
-        $data = $this->buildQuery()->get()->toArray();
-        return
-            Excel::create('Filename', function ($excel) {
 
-                $excel->sheet('Sheetname', function ($sheet) {
+    //   $this->validate();
 
-                    $sheet->fromArray(array(
-                        array('data1', 'data2'),
-                        array('data3', 'data4')
-                    ));
-                });
-            })->export('xls');
-    }
+
 }

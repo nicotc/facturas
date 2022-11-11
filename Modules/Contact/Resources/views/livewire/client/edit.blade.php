@@ -87,8 +87,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" wire:click.prevent="update()" class="btn btn-primary close-modal"
-                    data-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="update()" class="btn btn-primary">Actualizar</button>
             </div>
         </div>
     </div>

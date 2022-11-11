@@ -12,11 +12,8 @@
             <div class="card-body direct-chat-messages">
                 @forelse ($arrAddress as $Adddress )
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Direccion</strong>
-
-                 <button type="button" wire:click="editId({{ $Adddress->id }})" class="btn btn-warning" style="float: right"><i class="fas fa-edit"
-                    data-toggle="modal"
-                data-target="#Editaddress"
-                ></i></button>
+                 <button type="button" wire:click="editId({{ $Adddress->id }})" data-toggle="modal" data-target="#Editaddress" class="btn btn-warning" style="float: right">
+                    <i class="fas fa-edit"></i></button>
                 <p class="text-muted">{{ $Adddress->address }}</p>
                 <hr>
                 @empty

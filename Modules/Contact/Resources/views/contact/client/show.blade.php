@@ -216,5 +216,11 @@ window.livewire.on('serviceBudget', service => {
         $('#editBudget').modal('hide');
         })
 
+    window.livewire.on('contactUpdated', () => {
+        $('#EditClient').modal('hide');
+        })
+
+
+
 </script>
 @endsection

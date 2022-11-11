@@ -18,17 +18,23 @@ class Edit extends Component
     public $notes;
 
 
-    public function mount(Contact $contact)
-    {
-    $this->contact = $contact;
-    $this->name = $contact->name;
-    $this->last_name = $contact->last_name;
-    $this->email = $this->contact->email;
-    $this->phone_home = $this->contact->phone_home;
-    $this->phone_mobile = $this->contact->phone_mobile;
-    $this->address = $this->contact->address;
-    $this->notes = $this->contact->notes;
-}
+
+
+    protected $rules = [
+        'name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email',
+        'address' => 'required',
+    ];
+
+
+
+    protected $messages = [
+        'name.required' => 'El nombre es requerido',
+        'last_name.required' => 'El apellido es requerido',
+        'email.required' => 'El email es requerido',
+        'address.required' => 'La dirección es requerida',
+    ];
 
     public function render()
     {
@@ -48,6 +54,7 @@ class Edit extends Component
     }
 
     public function update(){
+        $this->validate();
         $contactos = Contact::find($this->contact->id);
         $contactos->name = $this->name;
         $contactos->last_name = $this->last_name;
@@ -57,6 +64,7 @@ class Edit extends Component
         $contactos->address = $this->address;
         $contactos->notes = $this->notes;
         $contactos->save();
+        $this->emit('contactUpdated');
 
     }
 }
