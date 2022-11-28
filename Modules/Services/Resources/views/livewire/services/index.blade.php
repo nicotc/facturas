@@ -58,7 +58,7 @@
                                     <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-default" wire:click='delete({{$item->id}})'>
+                                    <button type="button" class="btn btn-default" wire:click='deleteId({{$item->id}})'>
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -76,4 +76,10 @@
 
         </table>
         {{ $data->links() }}
+
+
+    @include('services::partials.createMModal')
+    @include('services::partials.editMModal')
+    @include('services::partials.deleteModal')
+    
 </div>

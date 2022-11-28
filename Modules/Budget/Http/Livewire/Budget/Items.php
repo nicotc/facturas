@@ -150,7 +150,7 @@ class Items extends Component
 
     public function editId($id)
     {
-
+      
         $budgetEdit = BudgetItems::find($id);
         $this->idItem = $budgetEdit->id;
         $this->description = $budgetEdit->description;

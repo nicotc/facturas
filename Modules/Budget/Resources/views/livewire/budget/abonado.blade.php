@@ -2,14 +2,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card collapsed-card" wire:ignore.self>
+                <div class="card " wire:ignore.self>
                     <div class="card-header bg-olive">
-                        <i class="fas fa-dollar-sign"></i> Abonado:<b> {{$totalAbonado}}</b> | Total a pagar:<b> {{ $totalPagar }}</b> |   Deuda:<b> {{$totalPagar - $totalAbonado }}</b>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" >
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+                        <i class="fas fa-dollar-sign"></i> Abonado:
+                    
                     </div>
                     <div class="card-body">
                         <div class="col-12">

@@ -2,13 +2,16 @@
 
 namespace Modules\Budget\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Routing\Controller;
+use Modules\Budget\Entities\Abono;
+use Modules\Budget\Entities\Gasto;
 use Modules\Budget\Entities\Budget;
 use Modules\Contact\Entities\Contact;
 use Modules\Services\Entities\Service;
 use Modules\Budget\Entities\BudgetItems;
+use Modules\Budget\Entities\Presupuesto;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Contact\Entities\ContactAddress;
 use Modules\Contact\Entities\ContactsClient;
@@ -42,10 +45,14 @@ class BudgetController extends Controller
     {
 
 
-        $budget = Budget::find($id);
+        $budget = Budget::where('correlative', $id)->first();
+        $services = Service::where('id', $budget->services_id)->first();
         $contactClient = ContactsClient::find($budget->contacts_id);
-        $budgetItems = BudgetItems::where('budgets_id', $id)->get();
-        $pdf = Pdf::loadView('budget::pdf.budget', compact('budget', 'contactClient', 'budgetItems'));
+        $budgetItems = Presupuesto::where('numero_orden', $id)->get();
+
+        // dd($budgetItems);
+
+        $pdf = Pdf::loadView('budget::pdf.budget', compact('budget', 'contactClient', 'budgetItems', 'services'));
 
         return $pdf->stream('archivo.pdf');
 
@@ -53,4 +60,56 @@ class BudgetController extends Controller
         // return $pdf->download('itsolutionstuff.pdf');
 
     }
+
+
+    public function abono($id)
+    {
+
+        $abono = Abono::find($id);
+        $abonos = Abono::where('numero_orden', $abono->numero_orden)
+                        ->where('created_at', '<', $abono->created_at)->get();
+         $budget = Budget::where('correlative', $abono->numero_orden)->first();
+         $services = Service::where('id', $budget->services_id)->first();
+         $contactClient = ContactsClient::find($budget->contacts_id);
+         $presupuesto = Presupuesto::where('numero_orden', $abono->numero_orden)->sum('total');
+
+         $pdf = Pdf::loadView('budget::pdf.abono', compact('budget', 'contactClient',  'services',  'presupuesto', 'abono', 'abonos'));
+
+         return $pdf->stream('archivo.pdf');
+
+
+        // return $pdf->download('itsolutionstuff.pdf');
+
+    }
+
+
+    public function gastos($id)
+    {
+        $budget = Budget::where('correlative', $id)->first();
+        $services = Service::where('id', $budget->services_id)->first();
+        $contactClient = ContactsClient::find($budget->contacts_id);
+        $gastos = Gasto::where('numero_orden', $id)->get();
+        $presupuesto = Presupuesto::where('numero_orden',$id)->sum('total');
+        $pdf = Pdf::loadView('budget::pdf.gastos', compact('budget', 'contactClient',  'services',  'gastos', 'presupuesto'));
+
+        return $pdf->stream('archivo.pdf');
+
+    }
+    public function portada($id)
+    {
+        $budget = Budget::where('correlative', $id)->first();
+        $services = Service::where('id', $budget->services_id)->first();
+        $contactClient = ContactsClient::find($budget->contacts_id);
+        $gastos = Gasto::where('numero_orden', $id)->sum('total');
+        $presupuesto = Presupuesto::where('numero_orden', $id)->sum('total');
+        $pdf = Pdf::loadView('budget::pdf.portada', compact('budget', 'contactClient',  'services',  'gastos', 'presupuesto'));
+        return $pdf->stream('archivo.pdf');
+    }
+
+    public function factura(){
+
+        $pdf = Pdf::loadView('budget::pdf.factura');
+        return $pdf->stream('archivo.pdf');
+    }
+
 }

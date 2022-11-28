@@ -430,26 +430,26 @@
                     <table >
                         <tr>
                             <td class="attribute-label-center">
-                                <strong> Cod#: {{ $budget->correlative }} </strong>
+                                <strong> Presupuesto </strong>
                             </td>
                         <tr>
                             <td  class="attribute-label-center" >
-                             Fecha de Emisión:
+                        <strong>Nº {{ $budget->correlative }}</strong>
                             </td>
                         </tr>
                         <tr class="attribute-value-center">
                             <td>
-                                <strong> {{ $budget->created_at->format('d/m/Y') }}</strong>
+<strong> Fecha de Emisión:</strong>
                             </td>
                         </tr>
                         <tr>
                             <td class="attribute-label-center">
-                                Fecha de Expira:
+<strong> {{ $budget->created_at->format('d/m/Y') }}</strong>
                             </td>
                         </tr>
                         <tr class="attribute-value-center" >
                             <td>
-                                <strong>{{ $budget->created_at->addDay(5)->format('d/m/Y') }} </strong>
+                          <strong>  {{ $services->name }}</strong>
                             </td>
                         </tr>
                       <tr>
@@ -480,66 +480,47 @@
                 <table width="100%" style="border: 1px solid #000000;">
 
                     <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            Nombre y Apellido o Razón Social:
+                        <td style="font-size: 12px;" >
+                            <b>Nombre y Apellido o Razón Social:</b>
                         </td>
-                        <td width="55%" class="attribute-value-left">
+                        <td style="font-size: 14px;">
                             {{ $contactClient->name }}
                         </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            Domicilio Fiscal:
+                        <td style="font-size: 12px;">
+                            <b>RIF / C.I.:</b>
                         </td>
-                        <td width="55%" class="attribute-value-left">
-                            {{ $contactClient->address }}
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            Teléfono:
-                        </td>
-                        <td width="55%" class="attribute-value-left">
-                            {{ $contactClient->phone }}
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            Email:
-                        </td>
-                        <td width="55%" class="attribute-value-left">
-                            {{ $contactClient->email }}
-                        </td>
-                        <td></td>
-                    <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            RIF / C.I.:
-                        </td>
-                        <td width="55%" class="attribute-value-left">
+                        <td style="font-size: 14px;">
                             {{ $contactClient->type }}-{{ $contactClient->rif }}
                         </td>
-                        <td></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td width="35%" class="attribute-label">
-                            Dierección de la obra:
+                        <td style="font-size: 12px;">
+                            <b>Teléfono:</b>
                         </td>
-                        <td width="55%" class="attribute-value-left">
+                        <td style="font-size: 14px;">
+                           {{ $contactClient->phone }}
+                        </td>
+                        <td style="font-size: 12px;">
+                            <b>Email:</b>
+                        </td>
+                        <td style="font-size: 14px;">
+                            {{ $contactClient->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 12px;">
+                           <b> Domicilio Fiscal:</b>
+                        </td>
+                        <td style="font-size: 14px;" colspan="3">
+                            {{ $contactClient->address }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="font-size: 12px;"><b>Dierección de la obra:</b></td>
+                        <td style="font-size: 14px;" colspan="3">
                             {{ $budget->AddressName }}
                         </td>
-                        <td></td>
-                    </tr>
-
-
                 </table>
     </div>
 
@@ -548,45 +529,56 @@
         <table width="100%" style="border: 1px solid #000000;">
             <thead style="border: 1px solid #000000;">
                 <tr>
-                    <th style="width:2cm">
+                    <th style="width:2cm; font-size: 14px;">
                         <strong>Modelo</strong>
                     </th>
-                    <th style="width:1cm">
-                        <strong>Cant</strong>
-                    </th>
-                    <th style="width:10cm">
+                    <th style="width:6cm; font-size: 14px;">
                         <strong>Descripción</strong>
                     </th>
-                    <th style="width:3cm">
+                    <th style="width:1.5cm; font-size: 14px;">
+                        <strong>Area</strong>
+                    </th>
+                    <th style="width:1.5cm; font-size: 14px;">
+                            <strong>Cantidad</strong>
+                        </th>
+                    <th style="width:1.5cm; font-size: 14px;">
                         <strong>Precio Unitario</strong>
                     </th>
-                    <th style="width:3cm">
-                        <strong>Monto</strong>
+                    <th style="width:1.5cm; font-size: 14px;">
+                        <strong>Total</strong>
                     </th>
                 </tr>
             </thead>
             @php
                 $total = 0;
             @endphp
+
+
             @if(count($budgetItems) <= 6){
                 @foreach ($budgetItems as $item)
                     <tr style="text-align: center; border: 1px solid #000000;" class="item-description">
                         <td>
-                            <img style="width: 2cm;" src="{{ asset('lte-dist/img/AdminLTELogo.png') }}" ">
+                            @if($item->modelo != null)
+                           <img style="width: 2cm;" src="{{ asset($item->modelo)}}">
+                           @endif
+
                         </td>
                         <td>
-                            {{ $item->quantity }}
+                            {{ $item->descripcion }}
                         </td>
                         <td>
-                            {{ $item->description }}
+                            {{ $item->area }}
                         </td>
                         <td>
-                            USD {{ $item->costoUnitario }}
+                            {{ $item->cantidad }}
                         </td>
                         <td>
-                            USD {{ $item->Total }}
+                            USD {{ $item->precio_unitario }}
+                        </td>
+                        <td>
+                            USD {{ $item->total }}
                             @php
-                                $total += $item->Total;
+                                $total += $item->total;
                             @endphp
                         </td>
                     </tr>
@@ -597,7 +589,7 @@
                 <td colspan="3" style="text-align: right;">
                     <strong>Total:</strong>
                 </td>
-                <td  colspan="2" style="text-align: right; padding-right:0.5cm" >
+                <td  colspan="3" style="text-align: right; padding-right:0.5cm" >
                   USD {{$total}}
                 </td>
             </tr>
@@ -606,11 +598,7 @@
         </table>
     </div>
 
-    <div class="notes">
-        <div class="notes-label">
-            Nota: algun texto aqui
-        </div>
-    </div>
+
 <footer>
     <div class="container" style="margin-top:5px">
         <table width="100%" style="">

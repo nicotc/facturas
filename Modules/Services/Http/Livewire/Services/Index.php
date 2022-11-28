@@ -15,6 +15,8 @@ class Index extends Component
     public $hydrate;
     public $searchTerm = '';
     public $globalSearch = '';
+    public $ServiceID;
+    public $name;
     protected $listeners = [
         'searchLocal'
     ];
@@ -76,39 +78,35 @@ class Index extends Component
         ]);
     }
 
-    public function show($id)
-    {
-        redirect()->route('services.show', $id);
-    }
 
     public function edit($id)
     {
-        redirect()->route('services.edit', $id);
+        dd($id);
+        // redirect()->route('services.edit', $id);
     }
 
-    public function destroy($id)
-    {
-        $this->emit('delete', $id);
-    }
 
     public function add()
     {
-        redirect()->route('services.create');
+        dd("hola");
+        // redirect()->route('services.create');
     }
 
-    public function exportExcel()
+
+
+    public function deleteId($id)
     {
-        $data = $this->buildQuery()->get()->toArray();
-        return
-            Excel::create('Filename', function ($excel) {
-
-                $excel->sheet('Sheetname', function ($sheet) {
-
-                    $sheet->fromArray(array(
-                        array('data1', 'data2'),
-                        array('data3', 'data4')
-                    ));
-                });
-            })->export('xls');
+        $service = Service::find($id);
+        $this->ServiceID = $service->id;
+        $this->name = $service->name;
     }
+
+    public function delete()
+    {
+        $Service = Service::find($this->ServiceID);
+        $Service->delete();
+    }
+
+
+
 }

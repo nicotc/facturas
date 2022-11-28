@@ -56,9 +56,9 @@
                     @endforeach
                     <td>
                         <div class="btn-group mb-3">
-                            <button type="button" class="btn btn-default" wire:click='show({{$item->id}}) '>
+                            {{-- <button type="button" class="btn btn-default" wire:click='show({{$item->id}}) '>
                                 <i class="fas fa-eye"></i>
-                            </button>
+                            </button> --}}
 
                             <button type="button" class="btn btn-default" wire:click='editId({{$item->id}})' data-toggle="modal" data-target="#editar">
                                 <i class="fas fa-edit"></i>

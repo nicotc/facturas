@@ -41,7 +41,7 @@ class Index extends Component
     {
 
         return [
-            'correlative' => trans('# De Presupuesto'),
+            'correlative' => trans('# Control'),
             'service_name' => trans('Tipo de servicio'),
             'address' => trans('Dirección de la obra'),
             'status' => trans('Estado del presupuesto'),
@@ -120,6 +120,7 @@ class Index extends Component
 
     public function edit()
     {
+      
 
         // $this->validate();
         $Update = Budget::find($this->budgetId);

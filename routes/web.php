@@ -8,6 +8,13 @@ Route::get('/', function () {
     // return view('layouts.app');
 });
 
+Auth::routes();
+
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/login');
+});
+
 Route::get('/example', function () {
     return view('example');
 });
@@ -19,16 +26,6 @@ Route::get('/profiles', function () {
 Route::get('/table', function () {
     return view('table');
 });
-
-Auth::routes();
-
-Route::get('logout', function(){
-     Auth::logout();
-  return redirect('/login');
-});
-
-
-
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

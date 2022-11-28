@@ -1,17 +1,9 @@
 <div>
-    <div class="card-header bg-navy">
-        Items del presupuesto
-    </div>
+
     <div class="card-body">
         <div class="row ">
             <div class="col-md-6">
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" wire:click='print_pdf({{$budgetId}})'>
-                        <i class="fas fa-file-pdf text-danger"></i> Presupuesto
-                    </button>
-
-                </div>
 
             </div>
             <div class="col-md-6 ">
@@ -86,6 +78,7 @@
 
     @include('budget::partials.modalItemsAdd')
     @include('budget::partials.modalItemsEdit')
+
 
 
 

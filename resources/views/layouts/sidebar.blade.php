@@ -98,7 +98,7 @@
             </ul>
           </li>
 
-
+{{--
                 <li class="nav-item">
                     <a href="/budget" class="nav-link">
                         <i class="nav-icon fas fa-receipt"></i>
@@ -131,7 +131,7 @@
                             {{ __('Ordenes de compra') }}
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
 
 
@@ -155,7 +155,7 @@
                 @endcan
 
                 <li class="nav-item">
-                    <a href="/provider" class="nav-link">
+                    <a href="/materiales" class="nav-link">
                         <i class="fas fa-circle nav-icon text-maroon"></i>
                         <p>Contra Pedido</p>
                     </a>

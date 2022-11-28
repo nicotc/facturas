@@ -28,79 +28,89 @@ resize: none;
 
 
 <div class="container-fluid">
-        <div class="row mt-3">
-            <div class="col-12">
-                <div class="card callout callout-success">
+    <livewire:budget::ficha  :contactClient="$contactClient" :budget="$budget" />
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
-                                <b>Nombre y apellido o razón social:</b>
-                            </div>
-                            <div class="col-3">
-                                {{ $contactClient->name }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <b>Domicilio fiscal:</b>
-                            </div>
-                            <div class="col-3">
-                                {{ $contactClient->address }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <b>Teléfono:</b>
-                            </div>
-                            <div class="col-3">
-                                {{ $contactClient->phone }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <b>Direccion de la obra</b>
-                            </div>
-                            <div class="col-3">
-                                {{-- {{ $budget->contacts_address_id }} --}}
-                                {{ $budget->AddressName }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <b>Tipo de servicio:</b>
-                            </div>
-                            <div class="col-3">
-                                {{-- {{ $budget->services_id }} --}}
-                                {{ $budget->ServiceName }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 
 @section('content')
     @php
-        $budget_id = $budget->id;
+        $codigoProyecto = $budget->correlative;
     @endphp
 
-<livewire:budget::budget.abonado :budgetId="$budget_id" />
+{{-- <livewire:budget::budget.abonado :budgetId="$budget_id" /> --}}
 
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12 col-sm-12">
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1">
+                                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-one-desglose-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-desglose" role="tab" aria-controls="custom-tabs-one-desglose"
+                                                aria-selected="true">Desglose</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-presupuesto-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-presupuesto" role="tab" aria-controls="custom-tabs-one-presupuesto"
+                                                aria-selected="false">Presupuesto</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-abonos-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-abonos" role="tab" aria-controls="custom-tabs-one-abonos"
+                                                aria-selected="false">Abonos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-gastos-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-gastos" role="tab" aria-controls="custom-tabs-one-gastos"
+                                                aria-selected="false">Relación de gastos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-facturas-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-facturas" role="tab" aria-controls="custom-tabs-one-facturas"
+                                                aria-selected="false">Factura</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                                        <div class="tab-pane fade show active" id="custom-tabs-one-desglose" role="tabpanel"
+                                            aria-labelledby="custom-tabs-one-desglose-tab">
+                                            <livewire:budget::desglose.tab :codigoProyecto="$codigoProyecto"/>
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-one-presupuesto" role="tabpanel"
+                                            aria-labelledby="custom-tabs-one-presupuesto-tab">
+                                            <livewire:budget::pesupuesto :codigoProyecto="$codigoProyecto" />
+                                            {{-- <livewire:budget::budget.items :codigoProyecto="$codigoProyecto" /> --}}
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-one-abonos" role="tabpanel"
+                                            aria-labelledby="custom-tabs-one-abonos-tab">
+                                            <livewire:budget::abonado :codigoProyecto="$codigoProyecto" />
 
-
-
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-
-                        <livewire:budget::budget.items :budgetId="$budget_id" />
+                                            {{-- <livewire:budget::budget.items :budgetId="$budget_id" /> --}}
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-one-gastos" role="tabpanel"
+                                            aria-labelledby="custom-tabs-one-gastos-tab">
+                                            <livewire:budget::gastos :codigoProyecto="$codigoProyecto" />
+                                            {{-- <livewire:budget::budget.items :budgetId="$budget_id" /> --}}
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-one-facturas" role="tabpanel"
+                                            aria-labelledby="custom-tabs-one-facturas-tab">
+                                            facturas
+                                            {{-- <livewire:budget::budget.items :budgetId="$budget_id" /> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -145,11 +155,20 @@ resize: none;
 
 window.livewire.on('create', () => {
     $('#create').modal('hide');
+    $('#modalAddDesgloseItem').modal('hide');
+    $('#modalAddDesgloseDesglose').modal('hide');
+    $('#modalAddDesgloseExtras').modal('hide');
+    $('#modalAddGastos').modal('hide');
     toastr.success("{{ __('Item creado correctamente') }}")
 
 })
 window.livewire.on('update', () => {
     $('#ItemsEdit').modal('hide');
+    $('#modalEditDesgloseItem').modal('hide');
+    $('#modalEditDesgloseDesglose').modal('hide');
+    $('#modalEditDesgloseExtras').modal('hide');
+    $('#modalEditPresupuesto').modal('hide');
+    $('#modalEditGastos').modal('hide');
     toastr.success("{{ __('Item atualizado correctamente') }}")
 })
 

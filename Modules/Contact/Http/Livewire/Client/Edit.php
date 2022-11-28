@@ -36,6 +36,28 @@ class Edit extends Component
         'address.required' => 'La dirección es requerida',
     ];
 
+
+
+    public function mount($contact)
+    {
+        $this->name = $this->contact->name;
+        $this->last_name = $this->contact->last_name;
+        $this->email = $this->contact->email;
+        $this->phone_home = $this->contact->phone_home;
+        $this->phone_mobile = $this->contact->phone_mobile;
+        $this->address = $this->contact->address;
+        $this->notes = $this->contact->notes;
+    }
+
+
+
+
+
+
+
+
+
+
     public function render()
     {
         return view('contact::livewire.client.edit');

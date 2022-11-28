@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Inventory\Http\Controllers\InventoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,5 +17,7 @@
 
 
 Route::group(['middleware' => ['permission:client_list']], function () {
-    Route::resource('inventory', InventoryController::class);
+    Route::get('inventory', [InventoryController::class, 'index']);
+    Route::get('materiales', [InventoryController::class, 'materiales']);
+
 });
