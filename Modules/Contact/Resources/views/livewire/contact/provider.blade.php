@@ -1,27 +1,16 @@
   <div class="card-body">
     <div class="row ">
         <div class="col-md-6">
-            @can('users export')
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" wire:click='exportExcel()'>
-                    <i class="fas fa-file-excel"></i>
-                </button>
-                <button type="button" class="btn btn-default">
-                    <i class="fas fa-file-csv"></i>
-                </button>
-                <button type="button" class="btn btn-default">
-                    <i class="fas fa-file-pdf"></i>
-                </button>
-            </div>
-            @endcan
+
         </div>
         <div class="col-md-6 ">
             <div class="btn-group float-right">
 
-                <button type="button" class="btn btn-default" wire:click='add()'>
+                <button type="button" class="btn btn-default" wire:click='resetInput()' data-toggle="modal"
+                        data-target="#modalAddProveedor">
                     <i class="fas fa-plus-circle"></i>
                 </button>
-        
+
             </div>
         </div>
     </div>
@@ -52,13 +41,17 @@
                             @endforeach
                             <td>
                             <div class="btn-group mb-3">
-                                    <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    {{-- <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
+                                <button type="button" class="btn btn-warning" wire:click='editId({{$item->id}})' data-toggle="modal"
+                                    data-target="#modalEditProveedor">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {{-- <button type="button" class="btn btn-danger" wire:click="deleteId({{ $item->id }})" data-toggle="modal"
+                                    data-target="#modalDeleteServicios">
+                                    <i class="fas fa-trash"></i>
+                                </button> --}}
+
+
+                                    {{--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
                                         <i class="fas fa-trash"></i>
                                     </button> --}}
                                 </div>
@@ -76,4 +69,8 @@
 
         </table>
         {{ $data->links() }}
+
+        @include('contact::partials.modalAddProveedor')
+        @include('contact::partials.modalEditProveedor')
+        @include('contact::partials.modalDeleteProveedor')
 </div>

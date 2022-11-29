@@ -20,6 +20,21 @@ class Provider extends Component
         'searchLocal'
     ];
 
+
+    public $name;
+    public $last_name;
+    public $gender;
+    public $email;
+    public $phone_home;
+    public $phone_mobile;
+    public $address;
+    public $notes;
+    public $type;
+    public $ContactId;
+
+
+
+
     public function searchLocal($global)
     {
         $this->searchTerm = $global;
@@ -29,12 +44,11 @@ class Provider extends Component
     {
         return [
             'id' => 'ID',
-            'name' => trans('Nombre'),
-            'last_name' => trans('Apellido'),
+            'name' => trans('Proveedor'),
+            'last_name' => trans('Nombre Cliente'),
             'email' => trans('Email'),
             'phone_home' => trans('Telefono'),
-            'phone_mobile' => trans('Celular')
-
+            'phone_mobile' => trans('Celular'),
         ];
     }
 
@@ -92,13 +106,38 @@ class Provider extends Component
 
     public function show($id)
     {
-        redirect()->route('contact.show', $id);
+        // redirect()->route('contact.show', $id);
     }
 
-    public function edit($id)
+    public function editId($id)
     {
-        redirect()->route('contact.edit', $id);
+        $sql =  Contact::find($id);
+        $this->ContactId = $id;
+        $this->name = $sql->name;
+        $this->last_name = $sql->last_name;
+        $this->gender = $sql->gender;
+        $this->email = $sql->email;
+        $this->phone_home = $sql->phone_home;
+        $this->phone_mobile = $sql->phone_mobile;
+        $this->address = $sql->address;
+        $this->notes = $sql->notes;
     }
+
+    public function edit()
+    {
+        $sql =  Contact::find($this->ContactId);
+        $sql->name = $this->name;
+        $sql->last_name = $this->last_name;
+        $sql->gender = $this->gender;
+        $sql->email = $this->email;
+        $sql->phone_home = $this->phone_home;
+        $sql->phone_mobile = $this->phone_mobile;
+        $sql->address = $this->address;
+        $sql->notes = $this->notes;
+        $sql->save();
+
+    }
+
 
     public function destroy($id)
     {
@@ -107,22 +146,27 @@ class Provider extends Component
 
     public function add()
     {
-        redirect()->route('contact.create');
+        Contact::create([
+            'name' => $this->name,
+            'last_name' => $this->last_name,
+            'gender' => $this->gender,
+            'email' => $this->email,
+            'phone_home' => $this->phone_home,
+            'phone_mobile' => $this->phone_mobile,
+            'address' => $this->address,
+            'notes' => $this->notes,
+            'type' => "provider"
+        ]);
+
+
+
+
     }
 
-    public function exportExcel()
-    {
-        $data = $this->buildQuery()->get()->toArray();
-        return
-            Excel::create('Filename', function ($excel) {
+    public function resetInput(){
 
-                $excel->sheet('Sheetname', function ($sheet) {
-
-                    $sheet->fromArray(array(
-                        array('data1', 'data2'),
-                        array('data3', 'data4')
-                    ));
-                });
-            })->export('xls');
     }
+
+
+
 }

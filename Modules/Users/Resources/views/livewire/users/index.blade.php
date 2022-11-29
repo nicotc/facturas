@@ -40,13 +40,8 @@
                             @endforeach
                             <td>
                             <div class="btn-group mb-3">
-                                @can('users_show')
-                                    <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                @endcan
                                 @can('users_edit')
-                                    <button type="button" class="btn btn-default" wire:click='edit({{$item->id}})'>
+                                    <button type="button" class="btn btn-warning" wire:click='edit({{$item->id}})'>
                                         <i class="fas fa-edit"></i>
                                     </button>
                                 @endcan

@@ -1,4 +1,4 @@
-<div  class="modal fade" id="create" tabindex="-1" role="dialog"
+<div  class="modal fade" id="modalAddServicios" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" wire:ignore.self>
     <div class="modal-dialog" role="document">
         <form autocomplete="off" wire:submit.prevent="add()">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Nombre</label>
+                        <label for="name">Servicio</label>
                         <input type="text" class="form-control" id="name" wire:model="name">
                         @error('name') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
@@ -20,16 +20,7 @@
                         <input type="text" class="form-control" id="description" wire:model="description">
                         @error('description') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="cost">Costo</label>
-                        <input type="number" class="form-control" id="cost" wire:model="cost">
-                        @error('cost') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Precio de Venta</label>
-                        <input type="number" class="form-control" id="price" wire:model="price">
-                        @error('price') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
+
 
                 </div>
                 <div class="modal-footer">

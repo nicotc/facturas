@@ -17,6 +17,8 @@ class Index extends Component
     public $globalSearch = '';
     public $ServiceID;
     public $name;
+    public $idService;
+    public $description;
     protected $listeners = [
         'searchLocal'
     ];
@@ -79,16 +81,35 @@ class Index extends Component
     }
 
 
-    public function edit($id)
+    public function editId($id)
     {
-        dd($id);
-        // redirect()->route('services.edit', $id);
+        $serviceSQL  = Service::find($id);
+        $this->idService = $id;
+        $this->name = $serviceSQL->name;
+        $this->description = $serviceSQL->description;
+
+    }
+
+
+    public function edit()
+    {
+        $serviceSQL  = Service::find($this->idService);
+        $serviceSQL->name = $this->name;
+        $serviceSQL->description = $this->description;
+        $serviceSQL->save();
+
+
     }
 
 
     public function add()
     {
-        dd("hola");
+        Service::create([
+            'name' => $this->name,
+            'description' => $this->description
+        ]);
+
+
         // redirect()->route('services.create');
     }
 
@@ -108,5 +129,8 @@ class Index extends Component
     }
 
 
+    public function resetInput(){
+
+    }
 
 }

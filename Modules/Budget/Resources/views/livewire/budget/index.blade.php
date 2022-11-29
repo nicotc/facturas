@@ -53,8 +53,12 @@
                     @endforeach
                     <td>
                         <div class="btn-group mb-3">
-                            <button type="button" class="btn btn-default" wire:click='show({{$item->id}})'>
+                            <button type="button" class="btn btn-primary" wire:click='show({{$item->id}})'>
                                 <i class="fas fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" wire:click="editId({{ $item->id }})"
+                                data-target="#editBudget">
+                                <i class="fas fa-edit"></i>
                             </button>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
@@ -68,15 +72,7 @@
                                     <a class="dropdown-item" wire:click='status({{$item->id}} , 4)'>Finalizado</a>
                                 </div>
                             </div>
-                            {{-- <button type="button" class="btn btn-default" wire:click='status({{$item->id}})'>
-                                <i class="fas fa-traffic-light"></i>
-                            </button> --}}
-                            <button type="button" class="btn btn-default" data-toggle="modal" wire:click="editId({{ $item->id }})" data-target="#editBudget">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            {{-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-danger">
-                                <i class="fas fa-trash"></i>
-                            </button> --}}
+
                         </div>
                     </td>
                 </tr>

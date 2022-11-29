@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="modalDeleteServicios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>¿Estas seguro de eliminar el producto? <b> {{$name}} </b></p>
+                {{-- <p>¿Estas seguro de eliminar el producto? <b> {{$name}} </b></p> --}}
 
             </div>
             <div class="modal-footer">
