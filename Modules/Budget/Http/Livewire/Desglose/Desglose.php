@@ -108,7 +108,34 @@ class Desglose extends Component
     }
 
 
+
+    protected $rules = [
+        'descripcion' => 'required',
+        'material' => 'required',
+        'cantidad' => 'required',
+        'precioBase' => 'required',
+        'precioBaseProyectado' => 'required',
+
+    ];
+
+
+    protected $messages = [
+        'descripcion.required' => 'El campo Descripción es obligatorio',
+        'material.required' => 'El campo material es obligatorio',
+        'cantidad.required' => 'El cantidad es un campo obligatorio',
+        'precioBase.required' => 'El precioBase es un campo obligatorio',
+        'precioBaseProyectado.required' => 'El precioBaseProyectado es un campo obligatorio',
+    ];
+
+
+
+
+
+
+
+
     public function add(){
+        $this->validate();
         DesgloseDesglose::create([
             'desglose_items' => $this->itemsId,
             "numero_orden" => $this->codigoProyecto,
@@ -140,6 +167,7 @@ class Desglose extends Component
     }
 
     public function edit(){
+        $this->validate();
         $Update = DesgloseDesglose::find($this->idDesgloseDesglose);
         $Update->cantidad = $this->cantidad;
         $Update->material = $this->material;
@@ -169,13 +197,14 @@ class Desglose extends Component
 
 
     public function resetInput(){
-        $this->cantidad = "";
+        $this->cantidad = 1;
         $this->material = "";
         $this->descripcion = "";
         $this->precioBase = "";
         $this->precioTotal = "";
         $this->precioBaseProyectado = "";
         $this->precioTotalProyectado = "";
+        $this->resetErrorBag();
     }
 
 

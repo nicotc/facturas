@@ -11,9 +11,10 @@
             <div class="modal-body">
          <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <input type="text" wire:model="descripcion" class="form-control" name="descripcion" id="descripcion"
-                    placeholder="Descripción">
-                @error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror
+                <textarea type="text" wire:model="descripcion" class="form-control" id="descripcion"
+                        placeholder="Ingrese la descripción del item" rows="6"></textarea>
+@error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror
+
             </div>
 <div class="form-group">
             <label for="area">Area</label>

@@ -106,8 +106,42 @@ class Extras extends Component
         );
     }
 
+
+
+
+
+    protected $rules = [
+        'descripcion' => 'required',
+        'cantidad' => 'required|integer|min:1',
+        'precioBase' => 'required|regex:/^\d+(\.\d{1,2})?$/|min:1',
+        'precioTotal' => 'required',
+
+    ];
+
+
+    protected $messages = [
+        'descripcion.required' => 'El campo Descripción es obligatorio',
+        'cantidad.required' => 'El cantidad es un campo obligatorio',
+        'cantidad.required' => 'El cantidad es un campo entero',
+        'cantidad.min' => 'El cantidad es un campo positivo',
+        'precioBase.required' => 'El precioBase es un campo obligatorio',
+        'precioBase.regex' => 'El precioBase es un campo obligatorio y positivo',
+        'precioTotal.required' => 'El precioBaseProyectado es un campo obligatorio',
+    ];
+
+
+
+
+
+
+
+
+
+
+
     public function add()
     {
+        $this->validate();
         DesgloseExtras::create([
             "numero_orden" => $this->codigoProyecto,
             'desglose_items' => $this->itemsId,
@@ -134,6 +168,7 @@ class Extras extends Component
 
     public function edit()
     {
+        $this->validate();
         $Update = DesgloseExtras::find($this->idDesgloseDesglose);
         $Update->cantidad = $this->cantidad;
         $Update->descripcion = $this->descripcion;
@@ -180,7 +215,10 @@ class Extras extends Component
     public function calcular()
     {
         if ($this->precioBase != null) {
-            $this->precioTotal = $this->cantidad * $this->precioBase;
+            if($this->cantidad != null){
+                $this->precioTotal = $this->cantidad * $this->precioBase;
+            }
+
         }
     }
 
@@ -191,6 +229,7 @@ class Extras extends Component
         $this->descripcion = "";
         $this->precioBase = "";
         $this->precioTotal = "";
+        $this->resetErrorBag();
     }
 
 

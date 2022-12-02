@@ -100,12 +100,28 @@ class Items extends Component
     }
 
 
+    protected $rules = [
+        'descripcion' => 'required',
+        'area' => 'required',
+        'cantidad' => 'required'
+
+    ];
+
+
+    protected $messages = [
+        'descripcion.required' => 'El campo Descripción es obligatorio',
+        'cantidad.required' => 'El campo Cantidad es obligatorio',
+        'area.required' => 'El Area es un campo obligatorio',
+    ];
+
+
 
 
     // CRUD
 
     public function add()
     {
+        $this->validate();
         $DesgloseItems = DesgloseItems::create([
             "numero_orden" => $this->codigoProyecto,
             "descripcion" => $this->descripcion,
@@ -140,6 +156,7 @@ class Items extends Component
 
     public function edit()
     {
+        $this->validate();
          $Update = DesgloseItems::find($this->idDesgloseItems);
          $Update->descripcion = $this->descripcion;
          $Update->area = $this->area;
@@ -191,7 +208,8 @@ class Items extends Component
     {
         $this->descripcion = "";
         $this->area = "";
-        $this->cantidad = "";
+        $this->cantidad = 1;
+        $this->resetErrorBag();
     }
 
 

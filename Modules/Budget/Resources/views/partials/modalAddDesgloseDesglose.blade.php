@@ -12,7 +12,7 @@
                 <div class="form-group">
                         <label for="cantidad">Cantidad</label>
                         <input type="number" wire:model="cantidad" class="form-control" name="cantidad" id="cantidad"
-                            placeholder="Cantidad">
+                             min="1" >
                         @error('cantidad') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
@@ -22,15 +22,18 @@
                         @error('material') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripcion</label>
-                    <input type="text" wire:model="descripcion" class="form-control" name="descripcion" id="descripcion"
-                        placeholder="Descripcion">
+                    <label for="descripcion">Descripción</label>
+
+                      <textarea type="text" wire:model="descripcion" class="form-control" id="descripcion"
+                        placeholder="Ingrese la descripción del item" rows="6"></textarea>
                     @error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror
+
+
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Precio Base</label>
-                    <input type="text" wire:model="precioBase" class="form-control" name="precioBase" id="precioBase"
-                        placeholder="Precio Base">
+                    <input type="number" wire:model="precioBase" class="form-control" name="precioBase" id="precioBase"
+                       min="1">
                     @error('precioBase') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
@@ -39,8 +42,8 @@
                 </div>
                 <div class="form-group">
                     <label for="precioBaseProyectado">Precio Base Proyectado</label>
-                    <input type="text" wire:model="precioBaseProyectado" class="form-control" name="precioBaseProyectado" id="precioBaseProyectado"
-                        placeholder="Precio Base Proyectado">
+                    <input type="number" wire:model="precioBaseProyectado" class="form-control" name="precioBaseProyectado" id="precioBaseProyectado"
+                       min="1">
                     @error('precioBaseProyectado') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">

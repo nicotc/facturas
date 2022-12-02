@@ -17,14 +17,17 @@
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripcion</label>
-                    <input type="text" wire:model="descripcion" class="form-control" name="descripcion" id="descripcion"
-                        placeholder="Descripcion">
+         
+
+                        <textarea type="text" wire:model="descripcion" class="form-control" id="descripcion"
+                                placeholder="Ingrese la descripción del item" rows="6"></textarea>
+                            @error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror
+
                     @error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Precio Base</label>
-                    <input type="text" wire:model="precioBase" class="form-control" name="precioBase" id="precioBase"
-                        placeholder="Precio Base">
+                    <input type="number" wire:model="precioBase" class="form-control" name="precioBase" id="precioBase">
                     @error('precioBase') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
