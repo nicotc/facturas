@@ -93,12 +93,14 @@ resize: none;
                                             aria-labelledby="custom-tabs-one-abonos-tab">
                                             <livewire:budget::abonado :codigoProyecto="$codigoProyecto" />
 
-                                            {{-- <livewire:budget::budget.items :budgetId="$budget_id" /> --}}
+
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-one-gastos" role="tabpanel"
                                             aria-labelledby="custom-tabs-one-gastos-tab">
-                                            <livewire:budget::gastos :codigoProyecto="$codigoProyecto" />
-                                            {{-- <livewire:budget::budget.items :budgetId="$budget_id" /> --}}
+                                            <livewire:budget::gastos-tab :codigoProyecto="$codigoProyecto"/>
+
+                                          {{-- <livewire:budget::gastos :codigoProyecto="$codigoProyecto" /> --}}
+
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-one-facturas" role="tabpanel"
                                             aria-labelledby="custom-tabs-one-facturas-tab">
@@ -116,6 +118,7 @@ resize: none;
             </div>
         </div>
     </section>
+
 
 @endsection
 
@@ -171,6 +174,66 @@ window.livewire.on('update', () => {
     $('#modalEditGastos').modal('hide');
     toastr.success("{{ __('Item atualizado correctamente') }}")
 })
+
+         document.addEventListener('livewire:load', function () {
+
+
+// proveedor
+
+    let proveedores = [
+        @forelse ($proveedores as $proveedor_key => $proveedor_value)
+
+            { label: '{{$proveedor_value}}', value: '{{$proveedor_key}}', alias: '{{$proveedor_value}}' },
+        @empty
+            { label: 'no tienes proveedores ', value: '0', alias: 'no tienes proveedores' },
+        @endforelse
+
+    ];
+
+    // VirtualSelect.init({
+    //     ele: '#proveedor',
+    //     options: proveedores,
+    //     multiple: false,
+    //     search: true,
+    // });
+
+
+    VirtualSelect.init({
+  ele: '#proveedorModalEditarGastos',
+  options: proveedores
+});
+
+VirtualSelect.init({
+    ele: '#proveedorModalAddGastos',
+    options: proveedores
+    });
+
+
+       let selectedAddress = document.querySelector('#proveedorModalEditarGastos')
+            selectedAddress.addEventListener('change', () => {
+                let data = selectedAddress.value
+                let componente = $('#proveedorModalEditarGastos').data("component")
+                window.livewire.find(componente).set('proveedor', data)
+            })
+
+
+            let selectedAddGastos = document.querySelector('#proveedorModalAddGastos')
+                selectedAddGastos.addEventListener('change', () => {
+                    let data = selectedAddGastos.value
+                    let componente = $('#proveedorModalAddGastos').data("component")
+                    window.livewire.find(componente).set('proveedor', data)
+                })
+
+
+//    let selectedAddress = document.querySelector('#proveedor')
+//             selectedAddress.addEventListener('change', () => {
+//                 let data = selectedAddress.value
+//                 let componente = $('#proveedor').data("component")
+//                 window.livewire.find(componente).set('selectedAddress', data)
+//             })
+
+      })
+
 
 
 </script>

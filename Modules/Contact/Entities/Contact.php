@@ -26,6 +26,10 @@ class Contact extends Model
         return $this->name . ' ' . $this->last_name;
     }
 
+
+    public function getContactoNameAtribute(){
+         return $this->name;
+    }
     // protected static function newFactory()
     // {
     //     return \Modules\Contact\Database\factories\ContactFactory::new();

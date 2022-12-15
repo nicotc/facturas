@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gastos', function (Blueprint $table) {
+        Schema::create('gastos_detalles', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_orden');
+            $table->foreignId('gastos_id')->constrained();
             $table->date('fecha');
-            $table->string('proveedor');
-            $table->longText('descripcion');
-            $table->decimal('total', 12, 2);
+            $table->longText('descripcion')->nullable();
             $table->decimal('abono', 12, 2)->nullable();
-            $table->string('estado')->nullable();
             $table->longText('nota')->nullable();
-
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gastos');
+        Schema::dropIfExists('gastos_detalles');
     }
 };

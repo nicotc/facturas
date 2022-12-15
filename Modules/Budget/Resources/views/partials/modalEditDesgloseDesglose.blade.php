@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripcion</label>
-            
+
 
                         <textarea type="text" wire:model="descripcion" class="form-control" id="descripcion"
                                 placeholder="Ingrese la descripción del item" rows="6"></textarea>

@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="modalEditGastos" tabindex="-1" role="dialog"
+<div wire:ignore.self class="modal fade" id="modalEditGastosDetalle" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -20,7 +20,7 @@
 
                     <div data-component="{{ $this->id }}"  id="proveedorModalEditarGastos" wire:ignore  ></div>
                     @error('proveedor') <span class="error text-danger">{{ $message }}</span> @enderror
-                </div>
+                    </div>
 
                 </div>
 
@@ -34,16 +34,7 @@
                     <input type="text" wire:model="total" class="form-control" name="total" id="total" placeholder="total">
                     @error('total') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
-                {{-- <div class="form-group">
-                    <label for="abono">Abono</label>
-                    <input type="text" wire:model="abono" class="form-control" name="abono" id="abono" placeholder="abono">
-                    @error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <input type="text" wire:model="estado" class="form-control" name="estado" id="estado" placeholder="estado">
-                    @error('estado') <span class="error text-danger">{{ $message }}</span> @enderror
-                </div> --}}
+
                 <div class="form-group">
                     <label for="nota">Nota</label>
                     <textarea wire:model="nota" class="form-control" name="nota" id="nota"

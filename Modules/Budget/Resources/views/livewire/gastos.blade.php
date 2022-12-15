@@ -35,18 +35,21 @@
                 @foreach ($headers as $key => $value)
                 <td>
                     @if($key == "modelo")
-                    @if($item->$key != null)
-                    <img src="/{{$item->$key}}" width="60">
-                    @endif
+                        @if($item->$key != null)
+                            <img src="/{{$item->$key}}" width="60">
+                        @endif
+                    @elseif ($key == "proveedor")
+                            {{ nombreproveedor($item->$key) }}
                     @else
-                    {!! is_array($value) ? $value['func']($item->$key) : $item->$key !!}
+                        {!! is_array($value) ? $value['func']($item->$key) : $item->$key !!}
                     @endif
+
 
                 </td>
                 @endforeach
                 <td>
                     <div class="btn-group mb-3">
-
+                        <button class="btn btn-primary" wire:click='cambiarDetalle({{$item->id}})'><i class="fas fa-info"></i></button>
                         <button type="button" class="btn btn-warning" wire:click='editId({{$item->id}})'
                             data-toggle="modal" data-target="#modalEditGastos">
                             <i class="fas fa-edit"></i>

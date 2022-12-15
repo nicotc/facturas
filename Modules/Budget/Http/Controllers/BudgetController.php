@@ -12,9 +12,11 @@ use Modules\Contact\Entities\Contact;
 use Modules\Services\Entities\Service;
 use Modules\Budget\Entities\BudgetItems;
 use Modules\Budget\Entities\Presupuesto;
+use Modules\Inventory\Entities\Inventory;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Contact\Entities\ContactAddress;
 use Modules\Contact\Entities\ContactsClient;
+use Modules\Inventory\Http\Livewire\Materiales;
 use Modules\Budget\Http\Requests\CreateBudgetRequest;
 
 class BudgetController extends Controller
@@ -29,7 +31,9 @@ class BudgetController extends Controller
     {
         $budget = Budget::find($id);
         $contactClient = ContactsClient::find($budget->contacts_id);
-        return view('budget::items', compact('contactClient', 'budget'));
+        $proveedores = Contact::where('type', "provider")->pluck('name', 'id');
+        $materiales = Inventory::pluck('name', 'id');
+        return view('budget::items', compact('contactClient', 'budget', 'proveedores', 'materiales'));
     }
 
     public function showBreakdown($id)

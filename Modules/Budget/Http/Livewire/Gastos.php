@@ -5,6 +5,9 @@ namespace Modules\Budget\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Budget\Entities\Gasto;
+use Modules\Contact\Entities\Contact;
+use Modules\Contact\Entities\ContactAddress;
+use Modules\Contact\Http\Livewire\Contact\Client;
 
 class Gastos extends Component
 {
@@ -25,6 +28,7 @@ class Gastos extends Component
     public $estado;
     public $nota;
     public $GastoId;
+    public $ProveedoresArray;
 
 
 
@@ -99,6 +103,7 @@ class Gastos extends Component
     public function render()
     {
 
+        $this->ProveedoresArray = Contact::get();
         return view(
             'budget::livewire.gastos',
             [
@@ -113,14 +118,14 @@ class Gastos extends Component
 
 
     public function add(){
+        
         Gasto::create([
             'numero_orden'  =>  $this->codigoProyecto,
             'fecha'         =>  $this->fecha,
             'proveedor'     =>  $this->proveedor,
             'descripcion'   =>  $this->descripcion,
             'total' =>  $this->total,
-            'abono' => $this->abono,
-            'estado' => $this->estado,
+            'estado' => "Pendiente",
             'nota' => $this->nota
         ]);
         $this->emit('create');
@@ -141,7 +146,6 @@ class Gastos extends Component
         $this->proveedor = $update->proveedor;
         $this->descripcion = $update->descripcion;
         $this->total = $update->total;
-        $this->abono = $update->abono;
         $this->estado = $update->estado;
         $this->nota = $update->nota;
 
@@ -155,7 +159,6 @@ class Gastos extends Component
         $update->proveedor     =  $this->proveedor;
         $update->descripcion   =  $this->descripcion;
         $update->total =  $this->total;
-        $update->abono = $this->abono;
         $update->estado = $this->estado;
         $update->nota = $this->nota;
         $update->save();
@@ -191,6 +194,11 @@ class Gastos extends Component
     }
 
 
+    public function cambiarDetalle($id)
+    {
+        $this->emit('costosTabId', $id);
+        $this->emit('cambiarDetalle');
+    }
 
 
 }
